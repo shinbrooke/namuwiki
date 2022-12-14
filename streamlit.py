@@ -193,27 +193,19 @@ for i in range(len(academic_list)): #학문
 #figure 그리기
 c_plist = [angrybird_plus_list, crashlandingonyou_plus_list, gameserver_plus_list, itzy_plus_list, maplephantom_plus_list, myname_plus_list, readymadelife_plus_list, skycastle_plus_list, ssglanders_plus_list, transformer_plus_list]
 c_mlist = [angrybird_minus_list, crashlandingonyou_minus_list, gameserver_minus_list, itzy_minus_list, maplephantom_minus_list, myname_minus_list, readymadelife_minus_list, skycastle_minus_list, ssglanders_minus_list, transformer_minus_list]
-group_labels = ['추가', '삭제']
-colors = ['blue', 'red']
 selected_item1 = st.radio("대중문화/서브컬처 추가 vs 삭제", culture_list)	
 
 for i in range(len(culture_list)):
     if selected_item1 == culture_list[i]:
-        fig_c1 = ff.create_distplot([c_plist[i], c_mlist[i]], group_labels, colors=colors)
-        fig_c1.update_layout(title_text='추가/삭제 글자수 양상')
-        st.plotly_chart(fig_c1, use_container_width=True)
+        print("추가: {}번, 삭제: {}번".format(len(c_plist[i]),len(c_mlist[i])))
 
 a_plist = [aesthetic_plus_list, call_plus_list, epidemic_plus_list, greekromanmyth_plus_list, hungarianrevolution_plus_list, imjin_plus_list, montyhall_plus_list, officiallanguage_plus_list, pascaltriangle_plus_list, spotlight_plus_list]
 a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekromanmyth_minus_list, hungarianrevolution_minus_list, imjin_minus_list, montyhall_minus_list, officiallanguage_minus_list, pascaltriangle_minus_list, spotlight_minus_list]
-group_labels = ['추가', '삭제']
-colors = ['red', 'blue']
 selected_item2 = st.radio("학문 추가 vs 삭제", academic_list)	
 
 for i in range(len(academic_list)):
     if selected_item2 == academic_list[i]:
-        fig_a1 = ff.create_distplot([a_plist[i], a_mlist[i]], group_labels, colors=colors)
-        fig_a1.update_layout(title_text='추가/삭제 글자수 양상')
-        st.plotly_chart(fig_a1, use_container_width=True)
+        print("추가: {}번, 삭제: {}번".format(len(a_plist[i]),len(a_mlist[i])))
         
         
 st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
