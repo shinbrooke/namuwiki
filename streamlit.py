@@ -75,8 +75,10 @@ page_academic = df_academic.groupby('page')
 
 col1, col2 = st.columns(2) #한 줄에 2개의 column을 나열함
 with col1:
+    st.write("대중문화/서브컬처 관련")
     st.write(page_culture.size())
 with col2:
+    st.write("학문 관련")
     st.write(page_academic.size())
 
 #st.write(page_social.size())
