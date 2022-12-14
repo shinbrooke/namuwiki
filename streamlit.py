@@ -168,7 +168,7 @@ for i in range(len(academic_list)): #학문
 
 #예시
 st.write('앵그리버드-추가 글자수 리스트', angrybird_plus_list)
-st.write('앵그리버드-삭제 글자수 리스트'angrybird_minus_list)
+st.write('앵그리버드-삭제 글자수 리스트', angrybird_minus_list)
 
 
 
