@@ -138,10 +138,10 @@ st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양�
 
 fig1_2_1 = px.histogram(df_culture, x='uname', color="page", opacity = 0.6)
 fig1_2_1.update_layout(title_text='대중문화/서브컬처 분야 사용자별 편집 횟수')
-st.plotly_chart(fig2_1, use_container_width=True)
+st.plotly_chart(fig1_2_1, use_container_width=True)
 fig1_2_2 = px.histogram(df_academic, x='uname', color="page", opacity = 0.6)
 fig1_2_2.update_layout(title_text='학문 분야 사용자별 편집 횟수')
-st.plotly_chart(fig2_2, use_container_width=True)    
+st.plotly_chart(fig1_2_2, use_container_width=True)    
 
 st.markdown("## 2. 페이지 수정 총 횟수")
 # 키워드(페이지) 종류 확인
