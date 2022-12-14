@@ -18,22 +18,22 @@ def load_data(filename):
     return data
 
 #df0 = load_data("")
-df_culture = load_data('namuwiki/dataculture.csv')
-df_social = load_data('namuwiki/datasocial.csv')
-df_academic = load_data('namuwiki/dataacademic.csv')
+df_culture = load_data('dataculture.csv')
+df_social = load_data('datasocial.csv')
+df_academic = load_data('dataacademic.csv')
 #df = df0.copy()
 
-df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
-df_culture = df_culture.drop(['date', 'time'], axis=1)
-df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
+#df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
+#df_culture = df_culture.drop(['date', 'time'], axis=1)
+#df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
 
-df_social['datetime'] = df_social['date'] + " " + df_social['time']
-df_social = df_social.drop(['date', 'time'], axis=1)
-df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+#df_social['datetime'] = df_social['date'] + " " + df_social['time']
+#df_social = df_social.drop(['date', 'time'], axis=1)
+#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
-df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
-df_academic = df_academic.drop(['date', 'time'], axis=1)
-df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
+#df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
+#df_academic = df_academic.drop(['date', 'time'], axis=1)
+#df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
 
 st.write(df_academic) #test
 
