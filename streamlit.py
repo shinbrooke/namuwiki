@@ -111,24 +111,13 @@ for i in range(len(academic_list)):
 
 st.markdown("## 1. 페이지 수정한 사용자")
 st.markdown("### 1.1. 페이지를 수정한 사용자의 수 (unique username 개수)")
-uname1 = pd.DataFrame()
-uname1.columns = ['list', 'num']
-uname2 = pd.DataFrame()
-uname2.columns = ['list', 'num']
-for i in range(len(culture_list)):
-    uname1.list[i] = culture_radio[i]
-    uname1.num[i] = len(globals()[culture_list[i]].groupby('uname'))
-    
-for i in range(len(academic_list)):
-    uname2.list[i] = academic_radio[i]
-    uname2.num[i] = len(globals()[academic_list[i]].groupby('uname'))
     
 col11, col12 = st.columns(2) #한 줄에 2개의 column을 나열함
 with col11:
-    fig1_1_1 = px.histogram(uname1, x='list', color="num", opacity = 0.6)
+    fig1_1_1 = px.histogram(df_culture, x='uname', color="uname", opacity = 0.6)
     st.plotly_chart(fig1_1_1, use_container_width=True)
 with col12:
-    fig1_1_2 = px.histogram(uname2, x='list', color="num", opacity = 0.6)
+    fig1_1_2 = px.histogram(df_academic, x='uname', color="uname", opacity = 0.6)
     st.plotly_chart(fig1_1_2, use_container_width=True)
 # 대중문화 분야
 #st.markdown('***대중문화 분야***')
