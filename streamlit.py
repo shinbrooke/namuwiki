@@ -111,22 +111,17 @@ for i in range(len(academic_list)):
 
 st.markdown("## 1. 페이지 수정한 사용자")
 st.markdown("### 1.1. 페이지를 수정한 사용자의 수 (unique username 개수)")
-    
-col11, col12 = st.columns(2) #한 줄에 2개의 column을 나열함
-with col11:
-    fig1_1_1 = px.histogram(df_culture, x='uname', color="page", opacity = 0.6)
-    st.plotly_chart(fig1_1_1, use_container_width=True)
-with col12:
-    fig1_1_2 = px.histogram(df_academic, x='uname', color="page", opacity = 0.6)
-    st.plotly_chart(fig1_1_2, use_container_width=True)
-# 대중문화 분야
-#st.markdown('***대중문화 분야***')
-#for i in range(len(culture_list)):
-#    st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
-# 학문 분야
-#st.write('학문 분야')
-#for i in range(len(academic_list)):
-#    st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
+
+col1_1, col1_2 = st.columns(2) #한 줄에 2개의 column을 나열함
+
+with col1_1:
+    st.markdown('***대중문화 분야***')
+    for i in range(len(culture_list)):
+        st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
+with col2:
+    st.markdown('***학문 분야***')
+    for i in range(len(academic_list)):
+        st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
 st.markdown("### 1.2. 사용자별 편집 횟수")  
 st.write('cf. 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다')
@@ -159,7 +154,7 @@ col21, col22 = st.columns(2) #한 줄에 2개의 column을 나열함
 with col21:
     fig2_1 = px.histogram(df_culture, x='page', color="page", opacity = 0.6)
     st.plotly_chart(fig2_1, use_container_width=True)
-with col12:
+with col22:
     fig2_2 = px.histogram(df_academic, x='page', color="page", opacity = 0.6)
     st.plotly_chart(fig2_2, use_container_width=True)
     
