@@ -152,7 +152,24 @@ st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
 # [참고] 키워드(페이지)별 편집 기간
 # (추가) max, min 값도 제시해서 얼마나 오래되었는지, 얼마나 최근까지 수정되었는지 파악할 수 있을 것
 #for i in range(len(culture_list)): #대중문화
-#  print(globals()[culture_list[i]]['datetime'].max() - globals()[culture_list[i]]['datetime'].min())
+#  st.write(globals()[culture_list[i]]['datetime'].max() - globals()[culture_list[i]]['datetime'].min())
 #for i in range(len(academic_list)): #학문
-#  print(globals()[academic_list[i]]['datetime'].max() - globals()[academic_list[i]]['datetime'].min())
+#  st.write(globals()[academic_list[i]]['datetime'].max() - globals()[academic_list[i]]['datetime'].min())
 
+
+st.markdown("***4. 코멘트 분석***")
+# '되돌림', '편집요청' 따로 분석할 필요?
+# 코멘트 키워드 분석 - 리스트 저장까지 완료 (워드클라우드 만들어야 함)
+
+for i in range(len(culture_list)): #대중문화
+  globals()['comment_'+culture_list[i]] = globals()[culture_list[i]]['other'].values.tolist()
+  globals()['comment_'+culture_list[i]] = [x for x in globals()['comment_'+culture_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
+  globals()['comment_'+culture_list[i]] = [x[1:-1] for x in globals()['comment_'+culture_list[i]]] # 앞뒤 괄호 삭제
+
+for i in range(len(academic_list)): #학문
+  globals()['comment_'+academic_list[i]] = globals()[academic_list[i]]['other'].values.tolist()
+  globals()['comment_'+academic_list[i]] = [x for x in globals()['comment_'+academic_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
+  globals()['comment_'+academic_list[i]] = [x[1:-1] for x in globals()['comment_'+academic_list[i]]] # 앞뒤 괄호 삭제
+
+#예시
+st.write(comment_angrybird)
