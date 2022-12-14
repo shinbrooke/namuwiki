@@ -115,7 +115,8 @@ st.write('학문 분야')
 for i in range(len(academic_list)):
     st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
-st.markdown("***1.2. 사용자별 편집 횟수***")    
+st.markdown("***1.2. 사용자별 편집 횟수***")  
+# 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다
 # 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)
 # 대중문화 분야
 for i in range(len(culture_list)):
