@@ -28,9 +28,9 @@ df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
 df_culture = df_culture.drop(['date', 'time'], axis=1)
 df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
 
-df_social['datetime'] = df_social['date'] + " " + df_social['time']
-df_social = df_social.drop(['date', 'time'], axis=1)
-df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+#df_social['datetime'] = df_social['date'] + " " + df_social['time']
+#df_social = df_social.drop(['date', 'time'], axis=1)
+#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
 df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
 df_academic = df_academic.drop(['date', 'time'], axis=1)
