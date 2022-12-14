@@ -352,20 +352,6 @@ def get_mean_edit_terms(df):
 
   return edit_terms
 
-def plot_edit_terms(df, bin_interval=10, maxbin=500, isrel=True, target='edit_terms'):
-  fig = plt.figure(figsize=(10, 10))
-  if target == 'edit_terms':
-    data = get_mean_edit_terms(df)
-  bins = np.arange(0, maxbin, bin_interval)
-  hist, _ = np.histogram(data, bins)
-  if isrel:
-    hist = np.asarray(hist) / len(data)
-  # plt.hist(data, bins=bins)
-  plt.plot(bins[:-1], hist)
-  # plt.legend()
-  
-  plt.show()
-
 def plot_edit_terms(dfs, labels, bin_interval=10, maxbin=500, isrel=True, target='edit_terms'):
   fig = plt.figure(figsize=(10, 10))
   plotdict = {}
