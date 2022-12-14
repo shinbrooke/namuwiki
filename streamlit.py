@@ -206,18 +206,32 @@ st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
 st.write('키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)')
 st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
 
+st.markdown("***페이지별 수정 양상 추이***")
 # change column 숫자로 변환
 df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
 df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
 df_culture['change3'] = df_culture.groupby('page')['change2'].transform(pd.Series.cumsum)
 #페이지별 편집 양상 line graph
-st.write("페이지별 수정 양상 추이")
-basic_chart = alt.Chart(df_culture).mark_line().encode(
+st.write("*대중문화/서브컬처, 페이지별 수정 양상 추이*")
+basic_chart1 = alt.Chart(df_culture).mark_line().encode(
     x='datetime',
     y='change3',
     color='page',
 )
-st.altair_chart(basic_chart, use_container_width=True)
+st.altair_chart(basic_chart1, use_container_width=True)
+
+# change column 숫자로 변환 (학문)
+df_academic['change2'] = df_academic['change'].map(lambda x: x.lstrip('(').rstrip(')'))
+df_academic['change2'] = df_academic.change2.apply(lambda x: float(x))
+df_academic['change3'] = df_academic.groupby('page')['change2'].transform(pd.Series.cumsum)
+#페이지별 편집 양상 line graph
+st.write("*학문, 페이지별 수정 양상 추이*")
+basic_chart2 = alt.Chart(df_academic).mark_line().encode(
+    x='datetime',
+    y='change3',
+    color='page',
+)
+st.altair_chart(basic_chart2, use_container_width=True)
 
 st.write('cf. 변수 여러 개 그래프 확인 가능할 것')
 st.write('streamlit 내에서 쓸 수 있는 코드로 변환하겠습니다!')
