@@ -18,19 +18,22 @@ def load_data(filename):
     return data
 
 #df0 = load_data("")
-df_culture = load_data('dataculture.csv')
-df_social = load_data('datasocial.csv')
-df_academic = load_data('dataacademic.csv')
-#df = df0.copy()
+df_culture0 = load_data('dataculture.csv')
+df_social0 = load_data('datasocial.csv')
+df_academic0 = load_data('dataacademic.csv')
+
+df_culture = df_culture0.copy()
+df_social = df_social0.copy()
+df_academic = df_academic0.copy()
 
 # 3개의 csv 파일에 대해 date, time 칼럼 합치고 데이터타입 datetime으로 변경
 df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
 df_culture = df_culture.drop(['date', 'time'], axis=1)
 df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
 
-#df_social['datetime'] = df_social['date'] + " " + df_social['time']
-#df_social = df_social.drop(['date', 'time'], axis=1)
-#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+df_social['datetime'] = df_social['date'] + " " + df_social['time']
+df_social = df_social.drop(['date', 'time'], axis=1)
+df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
 df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
 df_academic = df_academic.drop(['date', 'time'], axis=1)
@@ -58,9 +61,9 @@ st.markdown("### 데이터 분석 결과")
 
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
-#page_social = df_social.groupby('page')
+page_social = df_social.groupby('page')
 page_academic = df_academic.groupby('page')
 
 st.write(page_culture.size())
-#st.write(page_social.size())
+st.write(page_social.size())
 st.write(page_academic.size())
