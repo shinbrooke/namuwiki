@@ -248,8 +248,8 @@ selected_item3 = st.radio("대중문화/서브컬처 수정 양상", culture_lis
 for i in range(len(culture_list)):
     if selected_item3 == culture_list[i]:
         figc, x = plt.subplots()
-        x.scatter(list(range(len(c_plist[i]))), c_plist[i], color="blue", alpha=0.3)
-        x.scatter(list(range(len(c_mlist[i]))), c_mlist[i], color="red", alpha=0.3)
+        x.scatter(list(range(len(c_plist[i]))), c_plist[len(c_plist)-i-1], color="blue", alpha=0.3)
+        x.scatter(list(range(len(c_mlist[i]))), c_mlist[len(c_mlist)-i-1], color="red", alpha=0.3)
         #pltc.figure(figsize=(60,80))
         st.pyplot(figc)
 
@@ -259,14 +259,14 @@ selected_item4 = st.radio("학문 수정 양상", academic_list)
 for i in range(len(academic_list)):
     if selected_item4 == academic_list[i]:
         figa, x = plt.subplots()
-        x.scatter(list(range(len(a_plist[i]))), a_plist[i], color="blue", alpha=0.3)
-        x.scatter(list(range(len(a_mlist[i]))), a_mlist[i], color="red", alpha=0.3)
+        x.scatter(list(range(len(a_plist[i]))), a_plist[len(a_plist)-i-1], color="blue", alpha=0.3)
+        x.scatter(list(range(len(a_mlist[i]))), a_mlist[len(a_mlist)-i-1], color="red", alpha=0.3)
         #plta.figure(figsize=(60,80))
         st.pyplot(figa)
         
 st.markdown("""
 **결과** \n
-대중문화/서브컬처 편집 글자수 추이: 페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 시간이 뒤로 갈수록(원점과 가까워질수록) 삭제가 더 우세한 것으로 보입니다.""")
+대중문화/서브컬처 편집 글자수 추이: 페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 시간이 최근으로 갈수록(원점과 가까워질수록) 삭제가 더 우세한 것으로 보입니다.""")
         
 st.markdown("***페이지별 수정 양상 추이***")
 st.write("변화한 글자수의 cumulative sum이 페이지별로 시간에 따라 어떻게 변화했는지를 확인한 그래프입니다.")
