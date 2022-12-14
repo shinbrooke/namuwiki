@@ -89,7 +89,7 @@ st.write(df_academic)
 academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
 acadamic_status = st.radio('학문 분야', academic_radio)
                             
-for i in range(len(acadamic_radio)):
+for i in range(10):
     if acadamic_status == acadamic_radio[i]:
         st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
