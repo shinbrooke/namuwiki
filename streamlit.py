@@ -158,7 +158,7 @@ with col22:
     fig2_2 = px.histogram(df_academic, x='page', color="page", opacity = 0.6)
     st.plotly_chart(fig2_2, use_container_width=True)
     
-st.markdown("## 3. 수정 양상***")
+st.markdown("## 3. 수정 양상")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
 st.write('cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함')
 st.write('cf. 삭제/추가 양상 가시화 필요')
