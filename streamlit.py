@@ -190,7 +190,7 @@ plt.figure(figsize=(60,80))
 plt.show()
 
 st.markdown("***4. 코멘트 분석***")
-st.write('# '되돌림', '편집요청' 따로 분석할 필요?')
+st.write("# '되돌림', '편집요청' 따로 분석할 필요?")
 st.write('# 코멘트 키워드 분석 - 리스트 저장까지 완료 (워드클라우드 만들어야 함)')
 
 for i in range(len(culture_list)): #대중문화
