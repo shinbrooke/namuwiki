@@ -197,7 +197,7 @@ selected_item1 = st.radio("대중문화/서브컬처 추가 vs 삭제", culture_
 
 for i in range(len(culture_list)):
     if selected_item1 == culture_list[i]:
-        print("추가: {}번, 삭제: {}번".format(len(c_plist[i]),len(c_mlist[i])))
+        st.write("추가: {}번, 삭제: {}번".format(len(c_plist[i]),len(c_mlist[i])))
 
 a_plist = [aesthetic_plus_list, call_plus_list, epidemic_plus_list, greekromanmyth_plus_list, hungarianrevolution_plus_list, imjin_plus_list, montyhall_plus_list, officiallanguage_plus_list, pascaltriangle_plus_list, spotlight_plus_list]
 a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekromanmyth_minus_list, hungarianrevolution_minus_list, imjin_minus_list, montyhall_minus_list, officiallanguage_minus_list, pascaltriangle_minus_list, spotlight_minus_list]
@@ -205,7 +205,7 @@ selected_item2 = st.radio("학문 추가 vs 삭제", academic_list)
 
 for i in range(len(academic_list)):
     if selected_item2 == academic_list[i]:
-        print("추가: {}번, 삭제: {}번".format(len(a_plist[i]),len(a_mlist[i])))
+        st.write("추가: {}번, 삭제: {}번".format(len(a_plist[i]),len(a_mlist[i])))
         
         
 st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
