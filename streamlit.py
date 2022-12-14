@@ -329,7 +329,7 @@ df_culture_aug0 = load_data('dataculture_aug.csv')
 df_academic_aug0 = load_data('dataacademic_aug.csv')
 
 df_culture_aug = df_culture_aug0.copy()
-df_academic_aug df_academic_aug0.copy()
+df_academic_aug = df_academic_aug0.copy()
 
 # 편집 텀
 st.write('## 1. 편집 텀')
