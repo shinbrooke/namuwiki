@@ -296,3 +296,228 @@ for i in range(len(academic_list)): #학문
 
 #변수명 예시: st.write(comment_angrybird)
 
+
+
+#4. 데이터 분석 결과 2
+st.markdown("<hr>", unsafe_allow_html=True)
+st.write('# 데이터 분석 결과 2: 학문 분야 500개, 대중문화 분야 397개 데이터 비교')
+
+df_culture_aug = load_data('dataculture_aug.csv')
+df_academic_aug = load_data('dataacademic_aug_mod.csv')
+
+
+# 편집 텀
+st.write('## 1. 편집 텀')
+def get_edit_counts(df):
+  edit_counts = df['page'].value_counts(sort=False)
+  return list(edit_counts)
+
+def get_date_diffs(df):
+  all_pages = df['page'].unique()
+  date_diffs = []
+  strptime_format = '%Y-%m-%d %H:%M:%S'
+
+  for page in all_pages:
+    diff = datetime.strptime(df[df['page'] == page]['time'].iloc[0], strptime_format) - datetime.strptime(df[df['page'] == page]['time'].iloc[-1], strptime_format)
+    date_diffs.append(diff)
+
+  return date_diffs
+
+def get_mean_edit_terms(df):
+  date_diffs = get_date_diffs(df)
+  date_diffs = [diff.days + diff.seconds/(3600*24) for diff in date_diffs]
+  edit_counts = get_edit_counts(df)
+  edit_terms = [diff / count for diff, count in zip(date_diffs, edit_counts)]
+
+  return edit_terms
+
+def plot_edit_terms(df, bin_interval=10, maxbin=500, isrel=True, target='edit_terms'):
+  fig = plt.figure(figsize=(10, 10))
+  if target == 'edit_terms':
+    data = get_mean_edit_terms(df)
+  bins = np.arange(0, maxbin, bin_interval)
+  hist, _ = np.histogram(data, bins)
+  if isrel:
+    hist = np.asarray(hist) / len(data)
+  # plt.hist(data, bins=bins)
+  plt.plot(bins[:-1], hist)
+  # plt.legend()
+  
+  plt.show()
+
+def plot_edit_terms(dfs, labels, bin_interval=10, maxbin=500, isrel=True, target='edit_terms'):
+  fig = plt.figure(figsize=(10, 10))
+  plotdict = {}
+  if target == 'edit_terms':
+    for i, df in enumerate(dfs):
+      plotdict[f'data{i}'] = get_mean_edit_terms(df)
+
+  bins = np.arange(0, maxbin, bin_interval)
+
+
+  for i in range(len(dfs)):
+    plotdict[f'hist{i}'], _ = np.histogram(plotdict[f'data{i}'], bins)
+
+  if isrel:
+    for i in range(len(dfs)):
+      plotdict[f'hist{i}'] = np.asarray(plotdict[f'hist{i}']) / len(plotdict[f'data{i}'])
+
+  for i in range(len(dfs)):
+    plt.plot(bins[:-1], plotdict[f'hist{i}'], label=labels[i])
+  
+  plt.xlabel('Mean days for an edit')
+  plt.ylabel('Relative frequency')
+  plt.legend()
+  
+  plt.show()
+  st.pyplot(fig)
+
+plot_edit_terms([df_academic_aug, df_culture_aug], ['academic', 'culture'], bin_interval=10)
+
+
+# 추이
+st.write('## 2. 편집 추이')
+def get_rel_change_means(df, length=100, fromr1=True):
+  df['len'] = df.groupby('page')['page'].transform('count')
+  df_mod = df[df['len'] >= 100]
+
+  change_lists = get_change_lists(df_mod, length, fromr1)
+  change_lists_cumsum = get_change_lists_cumsum(change_lists)
+  rel_change_lists = get_rel_change_lists(change_lists_cumsum)
+
+  rel_change_means = [sum(x)/len(x)-1 for x in zip(*rel_change_lists)]
+  return rel_change_means
+
+def get_change_lists(df, length, fromr1=True):
+  df_mod = df[df['len'] >= length]
+
+  change_lists = []
+  if fromr1:
+    for item in df_mod.page.unique():
+      change_list = list(df[df['page'] == item]['change'].iloc[-length:]) # r{length} ~ r1
+      change_lists.append(change_list)
+  else:
+    for item in df_mod.page.unique():
+      change_list = list(df[df['page'] == item]['change'].iloc[:length]) # r_latest ~ r{length}
+      change_lists.append(change_list)
+  
+  change_lists = [list(reversed(change_list)) for change_list in change_lists]
+  return change_lists
+
+def get_change_lists_cumsum(change_lists):
+  change_lists_cumsum = [np.cumsum(change_list) for change_list in change_lists]
+  return change_lists_cumsum
+
+def get_rel_change_lists(change_lists_cumsum):
+  rel_change_lists = []
+
+  for change_list in change_lists_cumsum:
+    rel_change_list = []
+    for i in range(len(change_list)):
+      if i==0:
+        rel_change_list.append(1)
+      try:
+        if change_list[i]:
+          rel = change_list[i+1] / change_list[i]
+          rel_change_list.append(rel)
+        else:
+          rel_change_list.append(1)
+      except IndexError:
+        pass
+
+    rel_change_list = remove_outliers(rel_change_list)
+    rel_change_lists.append(rel_change_list)
+
+  return rel_change_lists
+
+def remove_outliers(data):
+  iqr = stats.iqr(data, axis=0)
+  lowerbound = np.quantile(data, 0.25)-1.5*iqr
+  upperbound = np.quantile(data, 0.75)+1.5*iqr
+  normals = [x if x >= lowerbound else lowerbound for x in data]
+  normals = [x if x <= upperbound else upperbound for x in data]
+  return normals
+
+def plot_history(dfs, labels, length=100, fromr1=True):
+  fig = plt.figure(figsize=(20, 10))
+  plotdict = {}
+
+  for i, df in enumerate(dfs):
+    plotdict[f'means{i}'] = get_rel_change_means(df, length, fromr1)
+    x = range(1, len(plotdict[f'means{i}'])+1)
+    y = plotdict[f'means{i}']
+    plt.plot(x, y, label=labels[i])
+
+  # plt.plot(range(1, length+1), [0]*length, c='red')
+
+  plt.xlabel('Revision(step)')
+  plt.ylabel('Trend')
+  plt.legend()
+  
+  plt.show()
+  st.pyplot(fig)
+
+plot_history([df_academic_aug, df_culture_aug], labels=['academic', 'culture'], length=100, fromr1=True)
+
+# wordcloud
+st.write('## 3. 코멘트 텍스트 분석: Wordcloud')
+
+# df에서 comments를 얻는 함수
+def get_comments(df):
+  comments = list(df[df['other'].isna() == False]['other'])
+
+  comments = [comment for comment in comments if re.match(r'[가-힣ㄱ-ㅎ]', comment)]
+  comments = [comment for comment in comments if not re.match(r'봇|자동 편집|자동 병합', comment)]
+  comments = [re.sub(r'[^가-힣ㄱ-ㅎ]+http[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+www\.[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.com[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.net[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.org[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.kr[^가-힣ㄱ-ㅎ]+', '[LINK]', comment) for comment in comments]
+  comments = [comment for comment in comments if comment]
+
+  return comments
+
+# comments의 각 comment에 pos를 태깅하는 함수
+def get_tagged_comments(comments):
+  tagger = Komoran()
+  tagged_comments = [tagger.pos(comment) for comment in comments]
+  return tagged_comments
+
+# df로부터 lexical words를 얻는 함수
+def get_lexical_words(df):
+  comments = get_comments(df)
+  tagged_comments = get_tagged_comments(comments)
+
+  lexical_words = []
+  for tagged_comment in tagged_comments:
+    for word, pos in tagged_comment:
+      if pos != 'SL' and pos in ['NNP', 'NNG', 'VV', 'VA']:
+        lexical_words.append(word)
+
+  return lexical_words
+
+# words로부터 words의 Counter를 얻는 함수
+def get_lexical_words_count(words):
+  words_count = Counter(words)
+  return words_count
+
+# df로부터 wordcloud 그리는 함수
+def show_wordcloud(df):
+  words = get_lexical_words(df)# words 얻기
+  words_count = get_lexical_words_count(words) # words의 빈도수 얻기
+  
+  ## wordcloud 객체 설정
+  cloud = WordCloud(width=1000,
+                  height=800, 
+                  font_path='08서울남산체B.ttf',
+                  background_color='white')
+
+  cloud = cloud.fit_words(words_count)
+
+  ## wordcloud 그리기
+  fig = plt.figure(figsize=(15, 20))
+  plt.axis('off')
+  plt.imshow(cloud)
+  plt.show()
+  st.pyplot(fig)
+
+
+show_wordcloud(df_academic_aug)
+show_wordcloud(df_culture_aug)
+
