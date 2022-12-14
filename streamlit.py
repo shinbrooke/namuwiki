@@ -95,10 +95,10 @@ elif culture_status == culture_radio[1]:
 #st.write("일반사회 분야 키워드: '대학수학능력시험', '폭염', '사이버대학', '오마이뉴스', '인터넷 은어', '커뮤니티의 금기', 'i안심', '중앙선거관리위원회', '미제사건', '필카'")
 #st.write(df_social)
 
-st.write("학문 분야 키워드: '파스칼의 삼각형', '전염병', '미학', '몬티 홀 문제', '임진왜란', '공용어', '그리스 로마 신화', '조명 효과', '1956년 헝가리 혁명', '통화'")
+st.write("학문 분야 키워드: '미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과'")
 st.write(df_academic)
 
-academic_radio = ['aesthetic', 'call', 'epidemic', 'greekromanmyth', 'hungarianrevolution', 'imjin', 'montyhall', 'officiallanguage', 'pascaltriangle', 'spotlight']
+academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
 
 
 #3. 데이터 분석
