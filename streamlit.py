@@ -104,17 +104,27 @@ for i in range(len(culture_list)):
 for i in range(len(academic_list)):
   globals()[academic_list[i]] = df_academic[df_academic['page'] == academic_list[i]]
 
-st.markdown("***1. 페이지 수정한 사용자의 수***")
+st.markdown("***1.1. 페이지 수정한 사용자의 수***")
 # 대중문화 분야
 st.write('대중문화 분야')
 for i in range(len(culture_list)):
-    st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname')), end='') #한글 키워드 출력
+    st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
 
 # 학문 분야
 st.write('학문 분야')
 for i in range(len(academic_list)):
     st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
+st.markdown("***1.2. 사용자별 편집 횟수***")    
+# 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)
+# 대중문화 분야
+for i in range(len(culture_list)):
+  globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
+
+# 학문 분야
+for i in range(len(academic_list)):
+  globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
+    
 st.markdown("***2. 페이지 수정 총 횟수***")
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
