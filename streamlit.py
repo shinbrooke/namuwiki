@@ -264,6 +264,10 @@ for i in range(len(academic_list)):
         #plta.figure(figsize=(60,80))
         st.pyplot(figa)
         
+st.markdown("""
+**결과** \n
+대중문화/서브컬처 편집 글자수 추이: 페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 시간이 뒤로 갈수록(원점과 가까워질수록) 삭제가 더 우세한 것으로 보입니다.""")
+        
 st.markdown("***페이지별 수정 양상 추이***")
 st.write("변화한 글자수의 cumulative sum이 페이지별로 시간에 따라 어떻게 변화했는지를 확인한 그래프입니다.")
 # change column 숫자로 변환
