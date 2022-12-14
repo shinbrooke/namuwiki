@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
 from bokeh.plotting import figure
+from datetime import datetime
 
 #data loading
 # st.cache를 이용하여 데이터 로딩을 하는 함수
@@ -17,7 +18,24 @@ def load_data(filename):
     return data
 
 #df0 = load_data("")
+df_culture = load.data('dataculture.csv')
+df_social = load.data('datasocial.csv')
+df_academic = load.data('dataacademic.csv')
 #df = df0.copy()
+
+df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
+df_culture = df_culture.drop(['date', 'time'], axis=1)
+df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
+
+df_social['datetime'] = df_social['date'] + " " + df_social['time']
+df_social = df_social.drop(['date', 'time'], axis=1)
+df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+
+df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
+df_academic = df_academic.drop(['date', 'time'], axis=1)
+df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
+
+st.write(df_academic) #test
 
 st.subheader("2022-2 데이터 저널리즘 과제전")
 st.title("나무위키 활용 학습의 가능성과 한계")
