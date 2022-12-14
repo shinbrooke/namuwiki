@@ -20,21 +20,15 @@ def load_data(filename):
 
 #df0 = load_data("")
 df_culture0 = load_data('dataculture.csv')
-#df_social0 = load_data('datasocial.csv')
 df_academic0 = load_data('dataacademic.csv')
 
 df_culture = df_culture0.copy()
-#df_social = df_social0.copy()
 df_academic = df_academic0.copy()
 
 # 3개의 csv 파일에 대해 date, time 칼럼 합치고 데이터타입 datetime으로 변경
 df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
 df_culture = df_culture.drop(['date', 'time'], axis=1)
 df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
-
-#df_social['datetime'] = df_social['date'] + " " + df_social['time']
-#df_social = df_social.drop(['date', 'time'], axis=1)
-#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
 df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
 df_academic = df_academic.drop(['date', 'time'], axis=1)
@@ -68,7 +62,6 @@ st.write("""데이터는 나무위키의 대분류 중 '대중문화 및 서브�
 
 # 대분류별 키워드 리스트
 culture_list = ['angrybird', 'crashlandingonyou', 'gameserver', 'itzy', 'maplephantom', 'myname', 'readymadelife', 'skycastle', 'ssglanders', 'transformer']
-#social_list = ['']
 academic_list = ['aesthetic', 'call', 'epidemic', 'greekromanmyth', 'hungarianrevolution', 'imjin', 'montyhall', 'officiallanguage', 'pascaltriangle', 'spotlight']
 
 #전체 데이터
@@ -96,9 +89,9 @@ academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1
 acadamic_status = st.radio('학문 분야', academic_radio)
 
 # 위 코드랑 똑같은데 학문 분야도 라디오 기능 쓰려니까 오류 나네요.. 일단 각주처리해놓겠습니다!
-#for i in range(len(academic_radio)):
-#    if acadamic_status == acadamic_radio[i]:
-#        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
+for i in range(len(academic_radio)):
+    if acadamic_status == acadamic_radio[i]:
+        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
 #3. 데이터 분석 1: 10개씩 페이지 대조
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -189,7 +182,7 @@ st.markdown("""
 """)
 
 st.markdown("## 3. 수정 양상")
-st.write("수정이 어떻게 이루어지는지를 더 자세히 살펴보기 위해, 문서 역사의 여러 정보를 활용하여 각 페이지의 수정 양상 또한 알아보았습니다. 먼저, 삭제 및 추가된 글자의 수 및 삭제/추가된 횟수를 페이지별로 살펴보았습니다. 다음으로, 시간에 따른 수정 양상의 변화를 cumulativs sum 그래프로 나타내었습니다.")
+st.write("수정이 어떻게 이루어지는지를 더 자세히 살펴보기 위해, 문서 역사의 여러 정보를 활용하여 각 페이지의 수정 양상 또한 알아보았습니다. 먼저, 삭제 및 추가된 글자의 수 및 삭제/추가된 횟수를 페이지별로 살펴보았습니다. 다음으로, 시간에 따른 수정 양상의 변화를 cumulative sum 그래프로 나타내었습니다.")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
 st.write("파란색: 추가, 빨간색: 삭제")
 #'cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함'
