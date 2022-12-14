@@ -168,8 +168,8 @@ with col22:
     
 st.markdown("## 3. 수정 양상")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
-st.write('cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함')
-st.write('cf. 삭제/추가 양상 가시화 필요')
+st.write("파란색: 추가, 빨간색: 삭제")
+#'cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함'
 for i in range(len(culture_list)): #대중문화
   globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
   globals()[culture_list[i]+'_minus_list'] = []
@@ -188,13 +188,11 @@ for i in range(len(academic_list)): #학문
     elif '-' in change:
       globals()[academic_list[i]+'_minus_list'].append(int(change[2:-1]))
 
-#예시
-#st.write('앵그리버드-추가 글자수 리스트', angrybird_plus_list)
-#st.write('앵그리버드-삭제 글자수 리스트', angrybird_minus_list)
+#figure 그리기
 c_plist = [angrybird_plus_list, crashlandingonyou_plus_list, gameserver_plus_list, itzy_plus_list, maplephantom_plus_list, myname_plus_list, readymadelife_plus_list, skycastle_plus_list, ssglanders_plus_list, transformer_plus_list]
 c_mlist = [angrybird_minus_list, crashlandingonyou_minus_list, gameserver_minus_list, itzy_minus_list, maplephantom_minus_list, myname_minus_list, readymadelife_minus_list, skycastle_minus_list, ssglanders_minus_list, transformer_minus_list]
 group_labels = ['추가', '삭제']
-colors = ['red', 'blue']
+colors = ['blue', 'red']
 selected_item = st.radio("대중문화/서브컬처", culture_list)	
 
 for i in range(len(culture_list)):
@@ -225,9 +223,30 @@ st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
 #for i in range(len(academic_list)): #학문
 #  st.write(globals()[academic_list[i]]['datetime'].max() - globals()[academic_list[i]]['datetime'].min())
 
-st.write('키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)')
-st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
+st.markdown("***키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)***")
+with st.expander("참고"):
+    st.write("파란색: 추가, 빨간색: 삭제")
+    st.write('x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
+st.markdown("*대중문화/서브컬처 편집 글자수 추이*")
+selected_item = st.radio("대중문화/서브컬처", culture_list)	
 
+for i in range(len(culture_list)):
+    if selected_item == culture_list[i]:
+        pltc.scatter(list(range(len(c_plus_list[i]))), c_plus_list[i], color="blue", alpha=0.3)
+        pltc.scatter(list(range(len(c_minus_list[i]))), c_minus_list[i], color="red", alpha=0.3)
+        #pltc.figure(figsize=(60,80))
+        st.pyplot(pltc, use_container_width=True)
+
+st.markdown("*학문 편집 글자수 추이*")
+selected_item = st.radio("학문", academic_list)	
+
+for i in range(len(academic_list)):
+    if selected_item == academic_list[i]:
+        plta.scatter(list(range(len(a_plus_list[i]))), a_plus_list[i], color="blue", alpha=0.3)
+        plta.scatter(list(range(len(a_minus_list[i]))), a_minus_list[i], color="red", alpha=0.3)
+        #plta.figure(figsize=(60,80))
+        st.pyplot(plta, use_container_width=True)
+        
 st.markdown("***페이지별 수정 양상 추이***")
 st.write("변화한 글자수의 cumulative sum이 페이지별로 시간에 따라 어떻게 변화했는지를 확인한 그래프입니다.")
 # change column 숫자로 변환
