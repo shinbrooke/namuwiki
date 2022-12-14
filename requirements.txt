@@ -7,3 +7,5 @@ plotly
 bokeh
 altair
 scipy
+konlpy
+Komoran
