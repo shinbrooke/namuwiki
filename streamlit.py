@@ -89,9 +89,9 @@ academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1
 acadamic_status = st.radio('학문 분야', academic_radio)
 
 # 위 코드랑 똑같은데 학문 분야도 라디오 기능 쓰려니까 오류 나네요.. 일단 각주처리해놓겠습니다!
-for i in range(len(academic_radio)):
-    if acadamic_status == acadamic_radio[i]:
-        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
+#for i in range(len(academic_radio)):
+#    if acadamic_status == acadamic_radio[i]:
+#        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
 #3. 데이터 분석 1: 10개씩 페이지 대조
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -128,8 +128,7 @@ st.markdown("""
 """)
         
 st.markdown("### 1.2. 사용자별 편집 횟수")  
-st.write('cf. 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다')
-st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
+#st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
 # 대중문화 분야
 #for i in range(len(culture_list)):
 #    globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
