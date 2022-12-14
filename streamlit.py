@@ -185,10 +185,11 @@ st.write('키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강
 st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
 
 st.write('cf. 변수 여러 개 그래프 확인 가능할 것')
-plt.scatter(list(range(len(angrybird_plus_list))), df1_plus_list, color="blue", alpha=0.3)
-plt.scatter(list(range(len(angrybird_minus_list))), df1_minus_list, color="red", alpha=0.3)
-plt.figure(figsize=(60,80))
-plt.show()
+st.write('streamlit 내에서 쓸 수 있는 코드로 변환하겠습니다!')
+#plt.scatter(list(range(len(angrybird_plus_list))), df1_plus_list, color="blue", alpha=0.3)
+#plt.scatter(list(range(len(angrybird_minus_list))), df1_minus_list, color="red", alpha=0.3)
+#plt.figure(figsize=(60,80))
+#plt.show()
 
 st.markdown("***4. 코멘트 분석***")
 st.write("cf. '되돌림', '편집요청' 따로 분석할 필요?")
