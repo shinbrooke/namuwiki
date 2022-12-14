@@ -199,7 +199,7 @@ selected_item = st.radio("대중문화/서브컬처", culture_list)
 
 for i in range(len(culture_list)):
     if selected_item == culture_list[i]:
-        fig_c1 = ff.create_distplot([c_plist[i], c_mlist[i]], group_labels, colors=colors, opacity = 0.6)
+        fig_c1 = ff.create_distplot([c_plist[i], c_mlist[i]], group_labels, colors=colors)
         fig_c1.update_layout(title_text='추가/삭제 글자수 양상')
         st.plotly_chart(fig_c1, use_container_width=True)
 
@@ -211,7 +211,7 @@ selected_item = st.radio("학문", academic_list)
 
 for i in range(len(academic_list)):
     if selected_item == academic_list[i]:
-        fig_a1 = ff.create_distplot([a_plist[i], a_mlist[i]], group_labels, colors=colors, opacity = 0.6)
+        fig_a1 = ff.create_distplot([a_plist[i], a_mlist[i]], group_labels, colors=colors)
         fig_a1.update_layout(title_text='추가/삭제 글자수 양상')
         st.plotly_chart(fig_a1, use_container_width=True)
         
