@@ -127,15 +127,22 @@ st.markdown("### 1.2. 사용자별 편집 횟수")
 st.write('cf. 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다')
 st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
 # 대중문화 분야
-for i in range(len(culture_list)):
-    globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
-    st.write(culture_radio[i], globals()[culture_list[i]+'_user'])
+#for i in range(len(culture_list)):
+#    globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
+#    st.write(culture_radio[i], globals()[culture_list[i]+'_user'])
 
 # 학문 분야
-for i in range(len(academic_list)):
-    globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
-    st.write(academic_radio[i], globals()[academic_list[i]+'_user'])
-    
+#for i in range(len(academic_list)):
+#    globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
+#    st.write(academic_radio[i], globals()[academic_list[i]+'_user'])
+
+fig1_2_1 = px.histogram(df_culture, x='uname', color="page", opacity = 0.6)
+fig1_2_1.update_layout(title_text='대중문화/서브컬처 분야 사용자별 편집 횟수')
+st.plotly_chart(fig2_1, use_container_width=True)
+fig1_2_2 = px.histogram(df_academic, x='uname', color="page", opacity = 0.6)
+fig1_2_2.update_layout(title_text='학문 분야 사용자별 편집 횟수')
+st.plotly_chart(fig2_2, use_container_width=True)    
+
 st.markdown("## 2. 페이지 수정 총 횟수")
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
