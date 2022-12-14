@@ -232,20 +232,22 @@ selected_item3 = st.radio("대중문화/서브컬처 수정 양상", culture_lis
 
 for i in range(len(culture_list)):
     if selected_item3 == culture_list[i]:
-        pltc.scatter(list(range(len(c_plus_list[i]))), c_plus_list[i], color="blue", alpha=0.3)
-        pltc.scatter(list(range(len(c_minus_list[i]))), c_minus_list[i], color="red", alpha=0.3)
+        figc, x = plt.subplots()
+        x.scatter(list(range(len(c_plus_list[i]))), c_plus_list[i], color="blue", alpha=0.3)
+        x.scatter(list(range(len(c_minus_list[i]))), c_minus_list[i], color="red", alpha=0.3)
         #pltc.figure(figsize=(60,80))
-        st.pyplot(pltc, use_container_width=True)
+        st.pyplot(figc, use_container_width=True)
 
 st.markdown("*학문 편집 글자수 추이*")
 selected_item4 = st.radio("학문 수정 양상", academic_list)	
 
 for i in range(len(academic_list)):
     if selected_item4 == academic_list[i]:
-        plta.scatter(list(range(len(a_plus_list[i]))), a_plus_list[i], color="blue", alpha=0.3)
-        plta.scatter(list(range(len(a_minus_list[i]))), a_minus_list[i], color="red", alpha=0.3)
+        figa, x = plt.subplots()
+        x.scatter(list(range(len(a_plus_list[i]))), a_plus_list[i], color="blue", alpha=0.3)
+        x.scatter(list(range(len(a_minus_list[i]))), a_minus_list[i], color="red", alpha=0.3)
         #plta.figure(figsize=(60,80))
-        st.pyplot(plta, use_container_width=True)
+        st.pyplot(figa, use_container_width=True)
         
 st.markdown("***페이지별 수정 양상 추이***")
 st.write("변화한 글자수의 cumulative sum이 페이지별로 시간에 따라 어떻게 변화했는지를 확인한 그래프입니다.")
