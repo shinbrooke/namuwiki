@@ -74,7 +74,7 @@ culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
 
 for i in len(culture_radio):
     if culture_status == culture_radio[i]:
-        st.write(df_culture[df_culture['page'] == culture_list[i])
+        st.write(df_culture[df_culture['page'] == culture_list[i]])
 
 
 #st.write("일반사회 분야 키워드: '대학수학능력시험', '폭염', '사이버대학', '오마이뉴스', '인터넷 은어', '커뮤니티의 금기', 'i안심', '중앙선거관리위원회', '미제사건', '필카'")
@@ -88,7 +88,7 @@ acadamic_status = st.radio('학문 분야', culture_radio)
                             
 for i in len(acadamic_radio):
     if acadamic_status == acadamic_radio[i]:
-        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i])
+        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
