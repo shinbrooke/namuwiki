@@ -174,13 +174,20 @@ st.write('앵그리버드-삭제 글자수 리스트', angrybird_minus_list)
 
 st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
 
-# [참고] 키워드(페이지)별 편집 기간
+# [필요하면 코드 사용하기] 키워드(페이지)별 편집 기간
 # (추가) max, min 값도 제시해서 얼마나 오래되었는지, 얼마나 최근까지 수정되었는지 파악할 수 있을 것
 #for i in range(len(culture_list)): #대중문화
 #  st.write(globals()[culture_list[i]]['datetime'].max() - globals()[culture_list[i]]['datetime'].min())
 #for i in range(len(academic_list)): #학문
 #  st.write(globals()[academic_list[i]]['datetime'].max() - globals()[academic_list[i]]['datetime'].min())
 
+st.write('키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)')
+st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
+
+plt.scatter(list(range(len(df1_plus_list))), df1_plus_list, color="blue", alpha=0.3)
+plt.scatter(list(range(len(df1_minus_list))), df1_minus_list, color="red", alpha=0.3)
+plt.figure(figsize=(60,80))
+plt.show()
 
 st.markdown("***4. 코멘트 분석***")
 st.write('# '되돌림', '편집요청' 따로 분석할 필요?')
