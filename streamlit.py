@@ -118,7 +118,7 @@ with col1_1:
     st.markdown('***대중문화 분야***')
     for i in range(len(culture_list)):
         st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
-with col2:
+with col1_2:
     st.markdown('***학문 분야***')
     for i in range(len(academic_list)):
         st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
