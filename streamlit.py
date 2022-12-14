@@ -114,10 +114,10 @@ st.markdown("### 1.1. 페이지를 수정한 사용자의 수 (unique username �
     
 col11, col12 = st.columns(2) #한 줄에 2개의 column을 나열함
 with col11:
-    fig1_1_1 = px.histogram(df_culture, x='uname', color="uname", opacity = 0.6)
+    fig1_1_1 = px.histogram(df_culture, x='uname', color="page", opacity = 0.6)
     st.plotly_chart(fig1_1_1, use_container_width=True)
 with col12:
-    fig1_1_2 = px.histogram(df_academic, x='uname', color="uname", opacity = 0.6)
+    fig1_1_2 = px.histogram(df_academic, x='uname', color="page", opacity = 0.6)
     st.plotly_chart(fig1_1_2, use_container_width=True)
 # 대중문화 분야
 #st.markdown('***대중문화 분야***')
@@ -155,8 +155,14 @@ with col2:
     st.write("학문 관련")
     st.write(page_academic.size())
 
-#st.write(page_social.size())
-
+col21, col22 = st.columns(2) #한 줄에 2개의 column을 나열함
+with col21:
+    fig2_1 = px.histogram(df_culture, x='page', color="page", opacity = 0.6)
+    st.plotly_chart(fig2_1, use_container_width=True)
+with col12:
+    fig2_2 = px.histogram(df_academic, x='page', color="page", opacity = 0.6)
+    st.plotly_chart(fig2_2, use_container_width=True)
+    
 st.markdown("## 3. 수정 양상***")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
 st.write('cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함')
