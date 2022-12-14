@@ -11,6 +11,13 @@ import altair as alt
 from bokeh.plotting import figure
 from datetime import datetime
 
+from konlpy.tag import Komoran
+from wordcloud import WordCloud
+from collections import Counter
+import string
+import re
+from scipy import stats
+
 #data loading
 # st.cache를 이용하여 데이터 로딩을 하는 함수
 @st.cache #데이터를 불러와서 메모리에 가지고 있는 것 (매번 불러오기 번거롭기 때문)
