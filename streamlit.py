@@ -57,10 +57,10 @@ st.markdown("### 데이터 분석 결과")
 
 
 # 키워드(페이지) 종류 확인
-page_culture = df_culture.groupby('page')
-page_social = df_social.groupby('page')
-page_academic = df_academic.groupby('page')
+#page_culture = df_culture.groupby('page')
+#page_social = df_social.groupby('page')
+#page_academic = df_academic.groupby('page')
 
-st.write(page_culture.size())
-st.write(page_social.size())
-st.write(page_academic.size())
+#st.write(page_culture.size())
+#st.write(page_social.size())
+#st.write(page_academic.size())
