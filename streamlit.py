@@ -23,32 +23,44 @@ df_social = load_data('datasocial.csv')
 df_academic = load_data('dataacademic.csv')
 #df = df0.copy()
 
-#df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
-#df_culture = df_culture.drop(['date', 'time'], axis=1)
-#df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
+# 3개의 csv 파일에 대해 date, time 칼럼 합치고 데이터타입 datetime으로 변경
+df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
+df_culture = df_culture.drop(['date', 'time'], axis=1)
+df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
 
-#df_social['datetime'] = df_social['date'] + " " + df_social['time']
-#df_social = df_social.drop(['date', 'time'], axis=1)
-#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+df_social['datetime'] = df_social['date'] + " " + df_social['time']
+df_social = df_social.drop(['date', 'time'], axis=1)
+df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
 df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
 df_academic = df_academic.drop(['date', 'time'], axis=1)
 df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
 
-st.write(df_academic) #test
 
 st.subheader("2022-2 데이터 저널리즘 과제전")
 st.title("나무위키 활용 학습의 가능성과 한계")
 st.write("10조: 서정빈, 신부경, 정민제")
 
-#문제의식 서술
+#1. 문제의식 서술
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 문제의식")
 
-#데이터 소개
+#2. 데이터 소개
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 데이터 소개")
 
-#데이터 분석
+#나무위키 history 페이지 캡처해서 설명하면 좋을 것 같아요! - 정빈
+
+#3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 데이터 분석 결과")
+
+
+# 키워드(페이지) 종류 확인
+page_culture = df_culture.groupby('page')
+page_social = df_social.groupby('page')
+page_academic = df_academic.groupby('page')
+
+page_culture.size()
+page_social.size()
+page_academic.size()
