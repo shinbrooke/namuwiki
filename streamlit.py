@@ -334,8 +334,80 @@ df_academic_aug0 = load_data('dataacademic_aug.csv')
 df_culture_aug = df_culture_aug0.copy()
 df_academic_aug = df_academic_aug0.copy()
 
+# wordcloud
+st.write('## 3. 코멘트 텍스트 분석: Wordcloud')
+
+# df에서 comments를 얻는 함수
+def get_comments(df):
+  comments = list(df[df['other'].isna() == False]['other'])
+
+  comments = [comment for comment in comments if re.match(r'[가-힣ㄱ-ㅎ]', comment)]
+  comments = [comment for comment in comments if not re.match(r'봇|자동 편집|자동 병합', comment)]
+  comments = [re.sub(r'[^가-힣ㄱ-ㅎ]+http[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+www\.[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.com[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.net[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.org[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.kr[^가-힣ㄱ-ㅎ]+', '[LINK]', comment) for comment in comments]
+  comments = [comment for comment in comments if comment]
+
+  return comments
+
+# comments의 각 comment에 pos를 태깅하는 함수
+def get_tagged_comments(comments):
+  tagger = Komoran()
+  tagged_comments = [tagger.pos(comment) for comment in comments]
+  return tagged_comments
+
+# df로부터 lexical words를 얻는 함수
+def get_lexical_words(df):
+  comments = get_comments(df)
+  tagged_comments = get_tagged_comments(comments)
+
+  lexical_words = []
+  for tagged_comment in tagged_comments:
+    for word, pos in tagged_comment:
+      if pos != 'SL' and pos in ['NNP', 'NNG', 'VV', 'VA']:
+        lexical_words.append(word)
+
+  return lexical_words
+
+# words로부터 words의 Counter를 얻는 함수
+def get_lexical_words_count(words):
+  words_count = Counter(words)
+  return words_count
+
+# df로부터 wordcloud 그리는 함수
+def show_wordcloud(df):
+  words = get_lexical_words(df)# words 얻기
+  words_count = get_lexical_words_count(words) # words의 빈도수 얻기
+  
+  ## wordcloud 객체 설정
+  cloud = WordCloud(width=1000,
+                  height=800, 
+                  font_path='08서울남산체B.ttf',
+                  background_color='white')
+
+  cloud = cloud.fit_words(words_count)
+
+  ## wordcloud 그리기
+  fig = plt.figure(figsize=(15, 20))
+  plt.axis('off')
+  plt.imshow(cloud)
+  plt.show()
+  st.pyplot(fig)
+
+st.write('### 1.1. 학문 분야의 편집 코멘트 워드클라우드')
+show_wordcloud(df_academic_aug)
+
+st.write('### 1.2. 대중문화 분야의 편집 코멘트 워드클라우드')
+show_wordcloud(df_culture_aug)
+
+st.markdown('''
+- 코멘트만 보았을 때는 두 분야 모두 지식을 단조적으로 축적하기보다는 삭제 역시 활발히 이루어지는 것으로 보입니다.
+- 그런데 '삭제'라는 키워드가 등장했다고 해서 반드시 지식의 축적이 덜하다고 볼 수는 없습니다.
+- 대표적으로 맞춤법이나 문법을 지적하는 코멘트같은 경우, '삭제'를 언급한다고 해서 지식을 삭제한다고 보기 어렵습니다.
+- 또 코멘트 작성은 의무가 아니기 때문에 코멘트가 없는 경우도 많습니다.
+- 지식이 어떻게 형성되고 있는지 더 정확한 모습을 알아보기 위해서는 구체적인 편집 기록을 볼 필요가 있습니다.
+''')
+
 # 편집 텀
-st.write('## 1. 편집 텀')
+st.write('## 2. 편집 텀')
 def get_edit_counts(df):
   edit_counts = df['page'].value_counts(sort=False)
   return list(edit_counts)
@@ -390,7 +462,7 @@ plot_edit_terms([df_academic_aug, df_culture_aug], ['academic', 'culture'], bin_
 
 
 # 추이
-st.write('## 2. 편집 추이')
+st.write('## 3. 편집 추이')
 def get_rel_change_means(df, length=100, fromr1=True):
   df['len'] = df.groupby('page')['page'].transform('count')
   df_mod = df[df['len'] >= 100]
@@ -472,66 +544,4 @@ def plot_history(dfs, labels, length=100, fromr1=True):
   st.pyplot(fig)
 
 plot_history([df_academic_aug, df_culture_aug], labels=['academic', 'culture'], length=100, fromr1=True)
-
-# wordcloud
-st.write('## 3. 코멘트 텍스트 분석: Wordcloud')
-
-# df에서 comments를 얻는 함수
-def get_comments(df):
-  comments = list(df[df['other'].isna() == False]['other'])
-
-  comments = [comment for comment in comments if re.match(r'[가-힣ㄱ-ㅎ]', comment)]
-  comments = [comment for comment in comments if not re.match(r'봇|자동 편집|자동 병합', comment)]
-  comments = [re.sub(r'[^가-힣ㄱ-ㅎ]+http[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+www\.[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.com[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.net[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.org[^가-힣ㄱ-ㅎ]+|[^가-힣ㄱ-ㅎ]+\.kr[^가-힣ㄱ-ㅎ]+', '[LINK]', comment) for comment in comments]
-  comments = [comment for comment in comments if comment]
-
-  return comments
-
-# comments의 각 comment에 pos를 태깅하는 함수
-def get_tagged_comments(comments):
-  tagger = Komoran()
-  tagged_comments = [tagger.pos(comment) for comment in comments]
-  return tagged_comments
-
-# df로부터 lexical words를 얻는 함수
-def get_lexical_words(df):
-  comments = get_comments(df)
-  tagged_comments = get_tagged_comments(comments)
-
-  lexical_words = []
-  for tagged_comment in tagged_comments:
-    for word, pos in tagged_comment:
-      if pos != 'SL' and pos in ['NNP', 'NNG', 'VV', 'VA']:
-        lexical_words.append(word)
-
-  return lexical_words
-
-# words로부터 words의 Counter를 얻는 함수
-def get_lexical_words_count(words):
-  words_count = Counter(words)
-  return words_count
-
-# df로부터 wordcloud 그리는 함수
-def show_wordcloud(df):
-  words = get_lexical_words(df)# words 얻기
-  words_count = get_lexical_words_count(words) # words의 빈도수 얻기
-  
-  ## wordcloud 객체 설정
-  cloud = WordCloud(width=1000,
-                  height=800, 
-                  font_path='08서울남산체B.ttf',
-                  background_color='white')
-
-  cloud = cloud.fit_words(words_count)
-
-  ## wordcloud 그리기
-  fig = plt.figure(figsize=(15, 20))
-  plt.axis('off')
-  plt.imshow(cloud)
-  plt.show()
-  st.pyplot(fig)
-
-
-show_wordcloud(df_academic_aug)
-show_wordcloud(df_culture_aug)
 
