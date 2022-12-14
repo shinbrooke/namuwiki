@@ -149,22 +149,22 @@ st.markdown("*3.1. 삭제 vs 추가 횟수*")
 # 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함
 # 가시화 필요
 for i in range(len(culture_list)): #대중문화
-  globals()[culture_list+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
-  globals()[culture_list+'_minus_list'] = []
-  for change in globals()[culture_list]['change']:
+  globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
+  globals()[culture_list[i]+'_minus_list'] = []
+  for change in globals()[culture_list[i]]['change']:
     if '+' in change:
-      globals()[culture_list+'_plus_list'].append(int(change[2:-1])) #괄호, 기호 제외하고 int로 변경하여 리스트에 저장
+      globals()[culture_list[i]+'_plus_list'].append(int(change[2:-1])) #괄호, 기호 제외하고 int로 변경하여 리스트에 저장
     elif '-' in change:
-      globals()[culture_list+'_minus_list'].append(int(change[2:-1]))
+      globals()[culture_list[i]+'_minus_list'].append(int(change[2:-1]))
 
 for i in range(len(academic_list)): #학문
-  globals()[academic_list+'_plus_list'] = []
-  globals()[academic_list+'_minus_list'] = []
-  for change in globals()[academic_list]['change']:
+  globals()[academic_list[i]+'_plus_list'] = []
+  globals()[academic_list[i]+'_minus_list'] = []
+  for change in globals()[academic_list[i]]['change']:
     if '+' in change:
-      globals()[academic_list+'_plus_list'].append(int(change[2:-1])) #괄호, 기호 제외하고 int로 변경하여 리스트에 저장
+      globals()[academic_list[i]+'_plus_list'].append(int(change[2:-1])) #괄호, 기호 제외하고 int로 변경하여 리스트에 저장
     elif '-' in change:
-      globals()[academic_list+'_minus_list'].append(int(change[2:-1]))
+      globals()[academic_list[i]+'_minus_list'].append(int(change[2:-1]))
 
 #예시
 st.write(angrybird_plus_list)
