@@ -19,11 +19,11 @@ def load_data(filename):
 
 #df0 = load_data("")
 df_culture0 = load_data('dataculture.csv')
-df_social0 = load_data('datasocial.csv')
+#df_social0 = load_data('datasocial.csv')
 df_academic0 = load_data('dataacademic.csv')
 
 df_culture = df_culture0.copy()
-df_social = df_social0.copy()
+#df_social = df_social0.copy()
 df_academic = df_academic0.copy()
 
 # 3개의 csv 파일에 대해 date, time 칼럼 합치고 데이터타입 datetime으로 변경
@@ -31,9 +31,9 @@ df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
 df_culture = df_culture.drop(['date', 'time'], axis=1)
 df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
 
-df_social['datetime'] = df_social['date'] + " " + df_social['time']
-df_social = df_social.drop(['date', 'time'], axis=1)
-df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+#df_social['datetime'] = df_social['date'] + " " + df_social['time']
+#df_social = df_social.drop(['date', 'time'], axis=1)
+#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
 df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
 df_academic = df_academic.drop(['date', 'time'], axis=1)
@@ -47,6 +47,9 @@ st.write("10조: 서정빈, 신부경, 정민제")
 #1. 문제의식 서술
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 문제의식")
+with st.expander("문제의식 설명"):
+    st.write("나무위키")
+    st.write("설명")
 
 #2. 데이터 소개
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -56,19 +59,25 @@ st.markdown("### 데이터 소개")
 
 st.write('크롤링한 데이터를 데이터프레임으로 정리한 것은 아래와 같다.')
 st.write(df_culture)
-st.write(df_social)
+#st.write(df_social)
 st.write(df_academic)
 
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 데이터 분석 결과")
+st.markdown("***1. 페이지 수정한 사용자의 수***")
 
-
+st.markdown("***2. 페이지 수정 총 횟수***")
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
-page_social = df_social.groupby('page')
+#page_social = df_social.groupby('page')
 page_academic = df_academic.groupby('page')
 
 st.write(page_culture.size())
-st.write(page_social.size())
+#st.write(page_social.size())
 st.write(page_academic.size())
+
+st.markdown("***3. 수정 양상***")
+st.markdown("*3.1. 삭제 vs 추가 횟수*")
+
+st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
