@@ -58,9 +58,14 @@ st.markdown("### 데이터 소개")
 #나무위키 history 페이지 캡처해서 설명하면 좋을 것 같아요! - 정빈
 
 st.write('크롤링한 데이터를 데이터프레임으로 정리한 것은 아래와 같다.')
-st.write(df_culture)
+col1, col2 = st.columns(2) #한 줄에 2개의 column을 나열함
+
+with col1:
+    st.write(df_culture)
+with col2:
+    st.write(df_academic)
+
 #st.write(df_social)
-st.write(df_academic)
 
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
