@@ -210,7 +210,7 @@ st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값:
 df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
 df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
 for i in culture_list:
-    df_culture[page==i]['change3'] = df_culture[page==i].change2.cumsum
+    df_culture[df_culture.page==i]['change3'] = df_culture[page==i].change2.cumsum
 #페이지별 편집 양상 line graph
 st.write("페이지별 수정 양상 추이")
 basic_chart = alt.Chart(df_culture).mark_line().encode(
