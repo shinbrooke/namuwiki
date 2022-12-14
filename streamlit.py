@@ -55,7 +55,7 @@ with st.expander("문제의식 설명"):
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 데이터 소개")
 
-#나무위키 대분류 3개에서 어떻게 랜덤하게 키워드를 선별해서 history 크롤링했는지 간단히 언급 필요
+#나무위키 대분류 3개에서 어떻게 랜덤하게 키워드를 선별해서(선별기준) history 크롤링했는지 간단히 언급 필요
 #나무위키 history 페이지 캡처해서 설명하면 좋을 것 같아요! - 정빈
 
 st.write('크롤링한 데이터를 데이터프레임으로 정리한 것은 아래와 같다.')
@@ -97,6 +97,13 @@ acadamic_status = st.radio('학문 분야', academic_radio)
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### 데이터 분석 결과")
+
+# 키워드(페이지)별로 데이터프레임 저장
+for i in range(len(culture_list)):
+  globals()[culture_list[i]] = df_culture[df_culture['page'] == culture_list[i]]
+for i in range(len(academic_list)):
+  globals()[academic_list[i]] = df_academic[df_academic['page'] == academic_list[i]]
+
 st.markdown("***1. 페이지 수정한 사용자의 수***")
 
 st.markdown("***2. 페이지 수정 총 횟수***")
