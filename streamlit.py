@@ -105,6 +105,14 @@ for i in range(len(academic_list)):
   globals()[academic_list[i]] = df_academic[df_academic['page'] == academic_list[i]]
 
 st.markdown("***1. 페이지 수정한 사용자의 수***")
+# 대중문화 분야
+for i in range(len(culture_list)):
+    print(culture_list[i])
+    print(len(globals()[culture_list[i]].groupby('uname')))
+# 학문 분야
+for i in range(len(academic_list)):
+    print(academic_list[i])
+    print(len(globals()[academic_list[i]].groupby('uname')))
 
 st.markdown("***2. 페이지 수정 총 횟수***")
 # 키워드(페이지) 종류 확인
