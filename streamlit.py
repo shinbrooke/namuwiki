@@ -147,7 +147,7 @@ with col2:
 st.markdown("***3. 수정 양상***")
 st.markdown("*3.1. 삭제 vs 추가 횟수*")
 # 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함
-# 가시화 필요
+# 삭제/추가 양상 가시화 필요
 for i in range(len(culture_list)): #대중문화
   globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
   globals()[culture_list[i]+'_minus_list'] = []
@@ -167,8 +167,8 @@ for i in range(len(academic_list)): #학문
       globals()[academic_list[i]+'_minus_list'].append(int(change[2:-1]))
 
 #예시
-st.write(angrybird_plus_list)
-st.write(angrybird_minus_list)
+st.write('앵그리버드-추가 글자수 리스트', angrybird_plus_list)
+st.write('앵그리버드-삭제 글자수 리스트'angrybird_minus_list)
 
 
 
