@@ -6,3 +6,4 @@ seaborn
 plotly
 bokeh
 altair
+scipy
