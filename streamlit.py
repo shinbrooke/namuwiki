@@ -248,9 +248,8 @@ selected_item3 = st.radio("대중문화/서브컬처 수정 양상", culture_lis
 for i in range(len(culture_list)):
     if selected_item3 == culture_list[i]:
         figc, x = plt.subplots()
-        x.scatter(list(range(len(c_plist[len(c_plist)-i-1]))), c_plist[len(c_plist)-i-1], color="blue", alpha=0.3)
-        #x.scatter(list(range(len(c_plist[i]))), c_plist[len(c_plist[i])], color="blue", alpha=0.3)
-        x.scatter(list(range(len(c_mlist[len(c_mlist)-i-1]))), c_mlist[len(c_mlist)-i-1], color="red", alpha=0.3)
+        x.scatter(list(range(len(c_plist[i]))), c_plist[len(c_plist[i])], color="blue", alpha=0.3)
+        x.scatter(list(range(len(c_mlist[i]))), c_mlist[len(c_mlist[i])], color="blue", alpha=0.3)
         #pltc.figure(figsize=(60,80))
         st.pyplot(figc)
 
@@ -260,8 +259,8 @@ selected_item4 = st.radio("학문 수정 양상", academic_list)
 for i in range(len(academic_list)):
     if selected_item4 == academic_list[i]:
         figa, x = plt.subplots()
-        x.scatter(list(range(len(a_plist[len(c_mlist)-i-1]))), a_plist[len(c_mlist)-i-1], color="blue", alpha=0.3)
-        x.scatter(list(range(len(a_mlist[len(c_mlist)-i-1]))), a_mlist[len(a_mlist)-i-1], color="red", alpha=0.3)
+        x.scatter(list(range(len(a_plist[i]))), a_plist[len(a_plist[i])], color="blue", alpha=0.3)
+        x.scatter(list(range(len(a_mlist[i]))), a_mlist[len(a_mlist[i])], color="blue", alpha=0.3)
         #plta.figure(figsize=(60,80))
         st.pyplot(figa)
         
