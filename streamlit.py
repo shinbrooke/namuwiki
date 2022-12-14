@@ -209,14 +209,15 @@ st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값:
 # change column 숫자로 변환
 df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
 df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
+df_culture['change3'] = df_culture.change2.cumsum
 #페이지별 편집 양상 line graph
 st.write("페이지별 수정 양상 추이")
 basic_chart = alt.Chart(df_culture).mark_line().encode(
     x='datetime',
-    y='change2',
+    y='change3',
     color='page',
 )
-st.altair_chart(basic_chart)
+st.altair_chart(basic_chart, use_container_width=True)
 
 st.write('cf. 변수 여러 개 그래프 확인 가능할 것')
 st.write('streamlit 내에서 쓸 수 있는 코드로 변환하겠습니다!')
