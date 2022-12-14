@@ -116,8 +116,8 @@ for i in range(len(academic_list)):
     st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
 st.markdown("***1.2. 사용자별 편집 횟수***")  
-st.write('# 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다')
-st.write('# 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
+st.write('cf. 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다')
+st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
 # 대중문화 분야
 for i in range(len(culture_list)):
     globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
@@ -146,8 +146,8 @@ with col2:
 
 st.markdown("***3. 수정 양상***")
 st.markdown("*3.1. 삭제 vs 추가 횟수*")
-st.write('# 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함')
-st.write('# 삭제/추가 양상 가시화 필요')
+st.write('cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함')
+st.write('cf. 삭제/추가 양상 가시화 필요')
 for i in range(len(culture_list)): #대중문화
   globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
   globals()[culture_list[i]+'_minus_list'] = []
@@ -184,14 +184,15 @@ st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
 st.write('키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)')
 st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
 
-st.pyplt.scatter(list(range(len(df1_plus_list))), df1_plus_list, color="blue", alpha=0.3)
-st.pyplt.scatter(list(range(len(df1_minus_list))), df1_minus_list, color="red", alpha=0.3)
-st.pyplt.figure(figsize=(60,80))
-st.pyplt.show()
+st.write('cf. 변수 여러 개 그래프 확인 가능할 것')
+plt.scatter(list(range(len(angrybird_plus_list))), df1_plus_list, color="blue", alpha=0.3)
+plt.scatter(list(range(len(angrybird_minus_list))), df1_minus_list, color="red", alpha=0.3)
+plt.figure(figsize=(60,80))
+plt.show()
 
 st.markdown("***4. 코멘트 분석***")
-st.write("# '되돌림', '편집요청' 따로 분석할 필요?")
-st.write('# 코멘트 키워드 분석 - 리스트 저장까지 완료 (워드클라우드 만들어야 함)')
+st.write("cf. '되돌림', '편집요청' 따로 분석할 필요?")
+st.write('cf. 코멘트 키워드 분석 - 리스트 저장까지 완료 (워드클라우드 만들어야 함)')
 
 for i in range(len(culture_list)): #대중문화
   globals()['comment_'+culture_list[i]] = globals()[culture_list[i]]['other'].values.tolist()
