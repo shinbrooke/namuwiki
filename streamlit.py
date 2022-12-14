@@ -72,10 +72,10 @@ st.write(df_culture)
 culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
 culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
 
-for i in range(len(culture_radio)):
-    if culture_status == culture_radio[i]:
-        st.write(df_culture[df_culture['page'] == culture_list[i]])
-st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
+#for i in range(len(culture_radio)):
+#    if culture_status == culture_radio[i]:
+#        st.write(df_culture[df_culture['page'] == culture_list[i]])
+#st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 #st.write("일반사회 분야 키워드: '대학수학능력시험', '폭염', '사이버대학', '오마이뉴스', '인터넷 은어', '커뮤니티의 금기', 'i안심', '중앙선거관리위원회', '미제사건', '필카'")
 #st.write(df_social)
