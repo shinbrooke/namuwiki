@@ -7,6 +7,7 @@ import seaborn as sb
 import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
+import altair as alt
 from bokeh.plotting import figure
 from datetime import datetime
 
@@ -204,6 +205,18 @@ st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
 
 st.write('키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)')
 st.write('[참고] x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
+
+# change column 숫자로 변환
+df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
+df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
+#페이지별 편집 양상 line graph
+basic_chart = alt.Chart(df_culture).mark_line().encode(
+    x='datetime',
+    y='change',
+    color='page',
+    legend=alt.Legend(title='페이지별 수정 양상 추이')
+)
+st.altair_chart(basic_chart)
 
 st.write('cf. 변수 여러 개 그래프 확인 가능할 것')
 st.write('streamlit 내에서 쓸 수 있는 코드로 변환하겠습니다!')
