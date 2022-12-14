@@ -106,9 +106,11 @@ st.markdown("# 데이터 분석 결과 1: 10개씩 페이지 대조")
 
 # 키워드(페이지)별로 데이터프레임 저장
 for i in range(len(culture_list)):
-  globals()[culture_list[i]] = df_culture[df_culture['page'] == culture_list[i]]
+    df_culture2 = df_culture.sort_values(['datetime'], ascending = True)
+  globals()[culture_list[i]] = df_culture2[df_culture2['page'] == culture_list[i]]
 for i in range(len(academic_list)):
-  globals()[academic_list[i]] = df_academic[df_academic['page'] == academic_list[i]]
+    df_academic2 = df_academic.sort_values(['datetime'], ascending = True)
+  globals()[academic_list[i]] = df_academic2[df_academic2['page'] == academic_list[i]]
 
 st.markdown("## 1. 페이지 수정한 사용자")
 st.markdown("### 1.1. 페이지를 수정한 사용자의 수 (unique username 개수)")
