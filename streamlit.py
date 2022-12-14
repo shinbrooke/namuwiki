@@ -18,9 +18,9 @@ def load_data(filename):
     return data
 
 #df0 = load_data("")
-df_culture = load.data('shinbrooke/namuwiki/dataculture.csv')
-df_social = load.data('shinbrooke/namuwiki/datasocial.csv')
-df_academic = load.data('shinbrooke/namuwiki/dataacademic.csv')
+df_culture = load.data('github.com/shinbrooke/namuwiki/dataculture.csv')
+df_social = load.data('github.com/shinbrooke/namuwiki/datasocial.csv')
+df_academic = load.data('github.com/shinbrooke/namuwiki/dataacademic.csv')
 #df = df0.copy()
 
 df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
