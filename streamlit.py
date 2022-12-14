@@ -58,14 +58,9 @@ st.markdown("### 데이터 소개")
 #나무위키 history 페이지 캡처해서 설명하면 좋을 것 같아요! - 정빈
 
 st.write('크롤링한 데이터를 데이터프레임으로 정리한 것은 아래와 같다.')
-col1, col2 = st.columns(2) #한 줄에 2개의 column을 나열함
-
-with col1:
-    st.write(df_culture)
-with col2:
-    st.write(df_academic)
-
+st.write(df_culture)
 #st.write(df_social)
+st.write(df_academic)
 
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -78,9 +73,13 @@ page_culture = df_culture.groupby('page')
 #page_social = df_social.groupby('page')
 page_academic = df_academic.groupby('page')
 
-st.write(page_culture.size())
+col1, col2 = st.columns(2) #한 줄에 2개의 column을 나열함
+with col1:
+    st.write(page_culture.size())
+with col2:
+    st.write(page_academic.size())
+
 #st.write(page_social.size())
-st.write(page_academic.size())
 
 st.markdown("***3. 수정 양상***")
 st.markdown("*3.1. 삭제 vs 추가 횟수*")
