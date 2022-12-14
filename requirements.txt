@@ -8,3 +8,4 @@ bokeh
 altair
 scipy
 konlpy
+wordcloud
