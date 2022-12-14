@@ -213,7 +213,7 @@ df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
 st.write("페이지별 수정 양상 추이")
 basic_chart = alt.Chart(df_culture).mark_line().encode(
     x='datetime',
-    y='change',
+    y='change2',
     color='page',
 )
 st.altair_chart(basic_chart)
