@@ -67,9 +67,9 @@ culture_radio = ['앵그리버드 시리즈', '팬텀(메이플스토리)', 'SSG
 culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
 
 if culture_status == culture_radio[0]:
-    st.write(df_culture['page' == 'angrybird'])
+    st.write(df_culture['page'] == 'angrybird')
 elif culture_status == culture_radio[1]:
-    st.write(df_culture['page' == 'phantom'])
+    st.write(df_culture['page'] == 'phantom')
 
 
 
