@@ -148,3 +148,11 @@ st.markdown("***3. 수정 양상***")
 st.markdown("*3.1. 삭제 vs 추가 횟수*")
 
 st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
+
+# [참고] 키워드(페이지)별 편집 기간
+# (추가) max, min 값도 제시해서 얼마나 오래되었는지, 얼마나 최근까지 수정되었는지 파악할 수 있을 것
+#for i in range(len(culture_list)): #대중문화
+#  print(globals()[culture_list[i]]['datetime'].max() - globals()[culture_list[i]]['datetime'].min())
+#for i in range(len(academic_list)): #학문
+#  print(globals()[academic_list[i]]['datetime'].max() - globals()[academic_list[i]]['datetime'].min())
+
