@@ -71,7 +71,7 @@ st.write(df_culture)
 
 #라디오
 culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
-culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
+culture_status = st.radio(<p style=" font-size: 20px;">'대중문화 및 서브컬처 분야', culture_radio</p>)
 
 for i in range(len(culture_radio)):
     if culture_status == culture_radio[i]:
