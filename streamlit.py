@@ -72,7 +72,7 @@ st.write(df_culture)
 culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
 culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
 
-for i in len(culture_radio):
+for i in range(len(culture_radio)):
     if culture_status == culture_radio[i]:
         st.write(df_culture[df_culture['page'] == culture_list[i]])
 
@@ -86,7 +86,7 @@ st.write(df_academic)
 academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
 acadamic_status = st.radio('학문 분야', culture_radio)
                             
-for i in len(acadamic_radio):
+for i in range(len(acadamic_radio)):
     if acadamic_status == acadamic_radio[i]:
         st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
