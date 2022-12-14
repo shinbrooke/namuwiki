@@ -60,18 +60,36 @@ st.markdown("### 데이터 소개")
 
 st.write('크롤링한 데이터를 데이터프레임으로 정리한 것은 아래와 같다.')
 
-st.write("대중문화 및 서브컬처 분야 키워드: '앵그리버드 시리즈', '팬텀(메이플스토리)', 'SSG 랜더스/2021년/5월', '마이 네임', '게임 서버', '사랑의 불시착', 'ITZY', '트랜스포머: 사라진 시대', 'SKY 캐슬', '레디메이드 인생'")
+# 대분류별 키워드 리스트
+culture_list = ['angrybird', 'crashlandingonyou', 'gameserver', 'itzy', 'maplephantom', 'myname', 'readymadelife', 'skycastle', 'ssglanders', 'transformer']
+#social_list = ['']
+academic_list = ['aesthetic', 'call', 'epidemic', 'greekromanmyth', 'hungarianrevolution', 'imjin', 'montyhall', 'officiallanguage', 'pascaltriangle', 'spotlight']
+
+st.write("대중문화 및 서브컬처 분야 키워드: '앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대'")
 st.write(df_culture)
 
-culture_radio = ['앵그리버드 시리즈', '팬텀(메이플스토리)', 'SSG 랜더스/2021년/5월', '마이 네임', '게임 서버', '사랑의 불시착', 'ITZY', '트랜스포머: 사라진 시대', 'SKY 캐슬', '레디메이드 인생']
+culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
 culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
 
 if culture_status == culture_radio[0]:
-    st.write(df_culture['page'] == 'angrybird')
+    st.write(df_culture[df_culture['page'] == 'angrybird'])
 elif culture_status == culture_radio[1]:
-    st.write(df_culture['page'] == 'phantom')
-
-
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])    
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])
+elif culture_status == culture_radio[1]:
+    st.write(df_culture[df_culture['page'] == 'crashlandingonyou'])    
+    'angrybird', 'crashlandingonyou', 'gameserver', 'itzy', 'maplephantom', 'myname', 'readymadelife', 'skycastle', 'ssglanders', 'transformer'
 
 
 #st.write("일반사회 분야 키워드: '대학수학능력시험', '폭염', '사이버대학', '오마이뉴스', '인터넷 은어', '커뮤니티의 금기', 'i안심', '중앙선거관리위원회', '미제사건', '필카'")
@@ -79,6 +97,9 @@ elif culture_status == culture_radio[1]:
 
 st.write("학문 분야 키워드: '파스칼의 삼각형', '전염병', '미학', '몬티 홀 문제', '임진왜란', '공용어', '그리스 로마 신화', '조명 효과', '1956년 헝가리 혁명', '통화'")
 st.write(df_academic)
+
+academic_radio = ['aesthetic', 'call', 'epidemic', 'greekromanmyth', 'hungarianrevolution', 'imjin', 'montyhall', 'officiallanguage', 'pascaltriangle', 'spotlight']
+
 
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
