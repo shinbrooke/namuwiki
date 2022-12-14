@@ -120,12 +120,12 @@ st.markdown("***1.2. 사용자별 편집 횟수***")
 # 대중문화 분야
 for i in range(len(culture_list)):
     globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
-    st.write(globals()[culture_list[i]+'_user'])
+    st.write(culture_radio[i], globals()[culture_list[i]+'_user'])
 
 # 학문 분야
 for i in range(len(academic_list)):
     globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
-    st.write(globals()[academic_list[i]+'_user'])
+    st.write(academic_radio[i], globals()[academic_list[i]+'_user'])
     
 st.markdown("***2. 페이지 수정 총 횟수***")
 # 키워드(페이지) 종류 확인
