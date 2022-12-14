@@ -28,9 +28,9 @@ df_culture['datetime'] = df_culture['date'] + " " + df_culture['time']
 df_culture = df_culture.drop(['date', 'time'], axis=1)
 df_culture['datetime'] = pd.to_datetime(df_culture['datetime'])
 
-#df_social['datetime'] = df_social['date'] + " " + df_social['time']
-#df_social = df_social.drop(['date', 'time'], axis=1)
-#df_social['datetime'] = pd.to_datetime(df_social['datetime'])
+df_social['datetime'] = df_social['date'] + " " + df_social['time']
+df_social = df_social.drop(['date', 'time'], axis=1)
+df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
 df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
 df_academic = df_academic.drop(['date', 'time'], axis=1)
@@ -58,9 +58,9 @@ st.markdown("### 데이터 분석 결과")
 
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
-#page_social = df_social.groupby('page')
-#page_academic = df_academic.groupby('page')
+page_social = df_social.groupby('page')
+page_academic = df_academic.groupby('page')
 
 st.write(page_culture.size())
-#st.write(page_social.size())
-#st.write(page_academic.size())
+st.write(page_social.size())
+st.write(page_academic.size())
