@@ -76,7 +76,7 @@ culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
 for i in range(len(culture_radio)):
     if culture_status == culture_radio[i]:
         st.write(df_culture[df_culture['page'] == culture_list[i]])
-st.write('<p style=" font-size: 2px;"><style>div.row-widget.stRadio > div{flex-direction:row;}</style></p>', unsafe_allow_html=True)
+st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 #st.write("일반사회 분야 키워드: '대학수학능력시험', '폭염', '사이버대학', '오마이뉴스', '인터넷 은어', '커뮤니티의 금기', 'i안심', '중앙선거관리위원회', '미제사건', '필카'")
 #st.write(df_social)
@@ -88,10 +88,11 @@ st.write(df_academic)
 #라디오
 academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
 acadamic_status = st.radio('학문 분야', academic_radio)
-                            
-for i in range(10):
-    if acadamic_status == acadamic_radio[i]:
-        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
+
+# 위 코드랑 똑같은데 학문 분야도 라디오 기능 쓰려니까 오류 나네요.. 일단 각주처리해놓겠습니다!
+#for i in range(len(academic_radio)):
+#    if acadamic_status == acadamic_radio[i]:
+#        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
 #3. 데이터 분석
 st.markdown("<hr>", unsafe_allow_html=True)
