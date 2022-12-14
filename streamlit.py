@@ -31,9 +31,9 @@ df_academic = load_data('dataacademic.csv')
 #df_social = df_social.drop(['date', 'time'], axis=1)
 #df_social['datetime'] = pd.to_datetime(df_social['datetime'])
 
-#df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
-#df_academic = df_academic.drop(['date', 'time'], axis=1)
-#df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
+df_academic['datetime'] = df_academic['date'] + " " + df_academic['time']
+df_academic = df_academic.drop(['date', 'time'], axis=1)
+df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
 
 st.write(df_academic) #test
 
