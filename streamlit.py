@@ -106,13 +106,14 @@ for i in range(len(academic_list)):
 
 st.markdown("***1. 페이지 수정한 사용자의 수***")
 # 대중문화 분야
+st.write('대중문화 분야')
 for i in range(len(culture_list)):
-    st.write(culture_radio[i]) #한글 키워드 출력
-    st.write(len(globals()[culture_list[i]].groupby('uname')))
+    st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
+
 # 학문 분야
+st.write('학문 분야')
 for i in range(len(academic_list)):
     st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
-   # st.write(len(globals()[academic_list[i]].groupby('uname')))
 
 st.markdown("***2. 페이지 수정 총 횟수***")
 # 키워드(페이지) 종류 확인
