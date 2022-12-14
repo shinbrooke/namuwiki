@@ -326,7 +326,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 st.write('# 데이터 분석 결과 2: 학문 분야 500개, 대중문화 분야 397개 데이터 비교')
 
 df_culture_aug0 = load_data('dataculture_aug.csv')
-df_academic_aug0 = load_data('dataacademic_aug_mod.csv')
+df_academic_aug0 = load_data('dataacademic_aug.csv')
 
 df_culture_aug = df_culture_aug0.copy()
 df_academic_aug df_academic_aug0.copy()
