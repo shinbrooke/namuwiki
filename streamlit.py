@@ -65,6 +65,7 @@ culture_list = ['angrybird', 'crashlandingonyou', 'gameserver', 'itzy', 'mapleph
 #social_list = ['']
 academic_list = ['aesthetic', 'call', 'epidemic', 'greekromanmyth', 'hungarianrevolution', 'imjin', 'montyhall', 'officiallanguage', 'pascaltriangle', 'spotlight']
 
+#전체 데이터
 st.write("대중문화 및 서브컬처 분야 키워드: '앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대'")
 st.write(df_culture)
 
@@ -80,11 +81,13 @@ for i in range(len(culture_radio)):
 #st.write("일반사회 분야 키워드: '대학수학능력시험', '폭염', '사이버대학', '오마이뉴스', '인터넷 은어', '커뮤니티의 금기', 'i안심', '중앙선거관리위원회', '미제사건', '필카'")
 #st.write(df_social)
 
+#전체 데이터
 st.write("학문 분야 키워드: '미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과'")
 st.write(df_academic)
-                            
+
+#라디오
 academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
-acadamic_status = st.radio('학문 분야', culture_radio)
+acadamic_status = st.radio('학문 분야', academic_radio)
                             
 for i in range(len(acadamic_radio)):
     if acadamic_status == acadamic_radio[i]:
