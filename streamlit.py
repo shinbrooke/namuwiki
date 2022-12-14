@@ -46,19 +46,24 @@ st.write("10조: 서정빈, 신부경, 정민제")
 
 #1. 문제의식 서술
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("### 문제의식")
+st.markdown("# 문제의식")
 with st.expander("문제의식 설명"):
-    st.write("나무위키")
-    st.write("설명")
+    st.write("""**1. 나무위키의 활용**""")
+    st.write("""현재 나무위키, 위키피디아와 같은 '위키'들은 우리에게 너무나도 친숙한 존재가 되었습니다. 특히, 나무위키는 한국어 중심으로 구성된 플랫폼이라는 점에서 더 가깝게 느껴지기도 합니다. 구글과 같은 서치엔진에서 검색을 할 때도, 나무위키 문서가 검색 1페이지에 등장하는 모습을 자주 확인할 수 있습니다.  2022년 12월 기준 4,763,273개 가량의 문서가 나무위키에 작성되어 있으며, 이 문서들은 실시간으로 수정되기도 하고, 새로 만들어지고 있기도 합니다.""")
+    st.write("""**2. 나무위키의 신뢰성 문제**""")
+    st.write("""그렇지만 동시에, 나무위키가 의견 교류 및 축적의 플랫폼이 된다는 점에서 긍정적인 **집단지성(collective intelligence)**의 사례가 될 수 있는 가능성도 지닌다고 볼 수 있습니다. 나무위키 페이지에서는 '다른 위키와의 차이점'에서 개인적인 견해를 서술하는 것이 완전히 금지되지는 않는다는 점, 각주가 출처 제시보다는 부연 설명 용도로 자주 사용된다는 점 등을 꼽고 있습니다. 또한, 누구나 위키를 활용할 수 있다는 점, 자유롭게 의견을 나눌 수 있다는 점을 기본 방침에서도 강조하고 있습니다. 이러한 나무위키의 특성은 효과적인 의견 축적을 통한 집단지성의 발현 및 집단 학습으로 이어질 가능성이 있습니다. \n
+지금까지 집단지성의 개념적 모형, 집단지성을 활용한 협력학습의 가능성 등에 대한 연구는 다수 이루어졌지만, 일상적으로 사용되는 위키에서 이루어지고 있는 협력학습과 집단지성의 형성에 대한 연구는 부족해보입니다. 특히, 많은 사용자들이 활용하고 있는 나무위키의 경우, 특정 사건이나 이슈에 대한 편향된 시각을 지적하는 논문은 있었지만, 여기에서 이루어질 수 있는 학습과 공유된 의사소통 및 지식기반 형성의 과정을 탐색한 경우는 부족했습니다. 
+따라서 이번 프로젝트에서는 **나무위키의 '문서 역사' 데이터**를 분석해 봄으로써 나무위키에서 어떻게 지식이 형성되고 축적되는지를 대주제별로 확인하였습니다. 이를 통해 나무위키를 통해 학습하게 되는 양상을 확인하고, 나무위키 활용의 시사점을 얻을 수 있다고 생각합니다.
+""")
 
 #2. 데이터 소개
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("### 데이터 소개")
+st.markdown("# 데이터 소개")
 
 #나무위키 대분류 3개에서 어떻게 랜덤하게 키워드를 선별해서(선별기준) history 크롤링했는지 간단히 언급 필요
 #나무위키 history 페이지 캡처해서 설명하면 좋을 것 같아요! - 정빈
 
-st.write('크롤링한 데이터를 데이터프레임으로 정리한 것은 아래와 같다.')
+st.write("""데이터는 나무위키의 대분류 중 '대중문화 및 서브컬처', '학문'을 중심으로 Selenium을 활용하여 '문서 역사' 정보를 크롤링했습니다. 각 분야에서 랜덤으로 키워드 10개씩 뽑아서 먼저 분석했습니다. 그 후, 더 많은 데이터를 수집하여 전체적인 경향성을 확인했습니다. 각 분류별 뽑은 10개의 키워드와 데이터의 모습을 데이터프레임으로 정리한 것은 아래와 같습니다.""")
 
 # 대분류별 키워드 리스트
 culture_list = ['angrybird', 'crashlandingonyou', 'gameserver', 'itzy', 'maplephantom', 'myname', 'readymadelife', 'skycastle', 'ssglanders', 'transformer']
@@ -94,9 +99,9 @@ acadamic_status = st.radio('학문 분야', academic_radio)
 #    if acadamic_status == acadamic_radio[i]:
 #        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
-#3. 데이터 분석
+#3. 데이터 분석 1: 10개씩 페이지 대조
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("### 데이터 분석 결과")
+st.markdown("# 데이터 분석 결과 1: 10개씩 페이지 대조")
 
 # 키워드(페이지)별로 데이터프레임 저장
 for i in range(len(culture_list)):
@@ -104,18 +109,35 @@ for i in range(len(culture_list)):
 for i in range(len(academic_list)):
   globals()[academic_list[i]] = df_academic[df_academic['page'] == academic_list[i]]
 
-st.markdown("***1.1. 페이지 수정한 사용자의 수***")
-# 대중문화 분야
-st.write('대중문화 분야')
+st.markdown("## 1. 페이지 수정한 사용자")
+st.markdown("### 1.1. 페이지를 수정한 사용자의 수 (unique username 개수)")
+uname1 = pd.DataFrame()
+uname2 = pd.DataFrame()
 for i in range(len(culture_list)):
-    st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
-
-# 학문 분야
-st.write('학문 분야')
+    uname1['list'][i] = culture_radio[i]
+    uname1['num'][i] = len(globals()[culture_list[i]].groupby('uname'))
+    
 for i in range(len(academic_list)):
-    st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
+    uname2['list'][i] = academic_radio[i]
+    uname2['num'][i] = len(globals()[academic_list[i]].groupby('uname'))
+    
+col11, col12 = st.columns(2) #한 줄에 2개의 column을 나열함
+with col11:
+    fig1_1_1 = px.histogram(uname1, x='list', color="num", opacity = 0.6)
+    st.plotly_chart(fig1_1_1, use_container_width=True)
+with col12:
+    fig1_1_2 = px.histogram(uname2, x='list', color="num", opacity = 0.6)
+    st.plotly_chart(fig1_1_2, use_container_width=True)
+# 대중문화 분야
+#st.markdown('***대중문화 분야***')
+#for i in range(len(culture_list)):
+#    st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
+# 학문 분야
+#st.write('학문 분야')
+#for i in range(len(academic_list)):
+#    st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
-st.markdown("***1.2. 사용자별 편집 횟수***")  
+st.markdown("### 1.2. 사용자별 편집 횟수")  
 st.write('cf. 이 부분도 라디오 기능을 쓰거나 좀 더 가독성 있게 정리해야 할 것 같습니다')
 st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
 # 대중문화 분야
@@ -128,7 +150,7 @@ for i in range(len(academic_list)):
     globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
     st.write(academic_radio[i], globals()[academic_list[i]+'_user'])
     
-st.markdown("***2. 페이지 수정 총 횟수***")
+st.markdown("## 2. 페이지 수정 총 횟수")
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
 #page_social = df_social.groupby('page')
@@ -144,8 +166,8 @@ with col2:
 
 #st.write(page_social.size())
 
-st.markdown("***3. 수정 양상***")
-st.markdown("*3.1. 삭제 vs 추가 횟수*")
+st.markdown("## 3. 수정 양상***")
+st.markdown("### 3.1. 삭제 vs 추가 횟수")
 st.write('cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함')
 st.write('cf. 삭제/추가 양상 가시화 필요')
 for i in range(len(culture_list)): #대중문화
@@ -172,7 +194,7 @@ st.write('앵그리버드-삭제 글자수 리스트', angrybird_minus_list)
 
 
 
-st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
+st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
 
 # [필요하면 코드 사용하기] 키워드(페이지)별 편집 기간
 # (추가) max, min 값도 제시해서 얼마나 오래되었는지, 얼마나 최근까지 수정되었는지 파악할 수 있을 것
@@ -191,7 +213,7 @@ st.write('streamlit 내에서 쓸 수 있는 코드로 변환하겠습니다!')
 #plt.figure(figsize=(60,80))
 #plt.show()
 
-st.markdown("***4. 코멘트 분석***")
+st.markdown("### 3.3. 코멘트 분석")
 st.write("cf. '되돌림', '편집요청' 따로 분석할 필요?")
 st.write('cf. 코멘트 키워드 분석 - 리스트 저장까지 완료 (워드클라우드 만들어야 함)')
 
