@@ -193,7 +193,7 @@ c_plist = [angrybird_plus_list, crashlandingonyou_plus_list, gameserver_plus_lis
 c_mlist = [angrybird_minus_list, crashlandingonyou_minus_list, gameserver_minus_list, itzy_minus_list, maplephantom_minus_list, myname_minus_list, readymadelife_minus_list, skycastle_minus_list, ssglanders_minus_list, transformer_minus_list]
 group_labels = ['추가', '삭제']
 colors = ['blue', 'red']
-selected_item1 = st.radio("대중문화/서브컬처", culture_list)	
+selected_item1 = st.radio("대중문화/서브컬처 추가 vs 삭제", culture_list)	
 
 for i in range(len(culture_list)):
     if selected_item1 == culture_list[i]:
@@ -205,7 +205,7 @@ a_plist = [aesthetic_plus_list, call_plus_list, epidemic_plus_list, greekromanmy
 a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekromanmyth_minus_list, hungarianrevolution_minus_list, imjin_minus_list, montyhall_minus_list, officiallanguage_minus_list, pascaltriangle_minus_list, spotlight_minus_list]
 group_labels = ['추가', '삭제']
 colors = ['red', 'blue']
-selected_item2 = st.radio("학문", academic_list)	
+selected_item2 = st.radio("학문 추가 vs 삭제", academic_list)	
 
 for i in range(len(academic_list)):
     if selected_item2 == academic_list[i]:
@@ -228,7 +228,7 @@ with st.expander("참고"):
     st.write("파란색: 추가, 빨간색: 삭제")
     st.write('x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
 st.markdown("*대중문화/서브컬처 편집 글자수 추이*")
-selected_item3 = st.radio("대중문화/서브컬처", culture_list)	
+selected_item3 = st.radio("대중문화/서브컬처 수정 양상", culture_list)	
 
 for i in range(len(culture_list)):
     if selected_item3 == culture_list[i]:
@@ -238,7 +238,7 @@ for i in range(len(culture_list)):
         st.pyplot(pltc, use_container_width=True)
 
 st.markdown("*학문 편집 글자수 추이*")
-selected_item4 = st.radio("학문", academic_list)	
+selected_item4 = st.radio("학문 수정 양상", academic_list)	
 
 for i in range(len(academic_list)):
     if selected_item4 == academic_list[i]:
