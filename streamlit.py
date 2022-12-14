@@ -146,6 +146,31 @@ with col2:
 
 st.markdown("***3. 수정 양상***")
 st.markdown("*3.1. 삭제 vs 추가 횟수*")
+# 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함
+# 가시화 필요
+for i in range(len(culture_list)): #대중문화
+  globals()[culture_list+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
+  globals()[culture_list+'_minus_list'] = []
+  for change in globals()[culture_list]['change']:
+    if '+' in change:
+      globals()[culture_list+'_plus_list'].append(int(change[2:-1])) #괄호, 기호 제외하고 int로 변경하여 리스트에 저장
+    elif '-' in change:
+      globals()[culture_list+'_minus_list'].append(int(change[2:-1]))
+
+for i in range(len(academic_list)): #학문
+  globals()[academic_list+'_plus_list'] = []
+  globals()[academic_list+'_minus_list'] = []
+  for change in globals()[academic_list]['change']:
+    if '+' in change:
+      globals()[academic_list+'_plus_list'].append(int(change[2:-1])) #괄호, 기호 제외하고 int로 변경하여 리스트에 저장
+    elif '-' in change:
+      globals()[academic_list+'_minus_list'].append(int(change[2:-1]))
+
+#예시
+st.write(angrybird_plus_list)
+st.write(angrybird_minus_list)
+
+
 
 st.markdown("*3.2. 시간에 따른 수정 양상 변화*")
 
@@ -171,5 +196,5 @@ for i in range(len(academic_list)): #학문
   globals()['comment_'+academic_list[i]] = [x for x in globals()['comment_'+academic_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
   globals()['comment_'+academic_list[i]] = [x[1:-1] for x in globals()['comment_'+academic_list[i]]] # 앞뒤 괄호 삭제
 
-#예시
-st.write(comment_angrybird)
+#변수명 예시: st.write(comment_angrybird)
+
