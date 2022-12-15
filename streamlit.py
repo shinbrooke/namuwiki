@@ -208,6 +208,18 @@ st.markdown("""
 업데이트가 자주 되고, 다양한 의견을 낼 수 있는 키워드가 수정 횟수도 많고 편집에 참여하는 사람 수도 많은 것으로 보입니다. 특히 '학문' 분야에서는 '임진왜란'과 같은 한국사 관련 페이지가 다른 페이지에 비해 월등히 높은 수정 횟수를 보여주고 있습니다. 이는 '임진왜란'이 활발한 토론의 장이 되고 있음을 시사하나, 이 토론이 반달리즘에 가까울지 건설적인 지식 구성에 가까운지는 더 자세히 데이터를 살펴보아야 알 수 있을 듯합니다.
 """)
 
+for i in range(len(culture_list)): #대중문화
+  globals()['comment_'+culture_list[i]] = globals()[culture_list[i]]['other'].values.tolist()
+  globals()['comment_'+culture_list[i]] = [x for x in globals()['comment_'+culture_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
+  globals()['comment_'+culture_list[i]] = [x[1:-1] for x in globals()['comment_'+culture_list[i]]] # 앞뒤 괄호 삭제
+
+for i in range(len(academic_list)): #학문
+  globals()['comment_'+academic_list[i]] = globals()[academic_list[i]]['other'].values.tolist()
+  globals()['comment_'+academic_list[i]] = [x for x in globals()['comment_'+academic_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
+  globals()['comment_'+academic_list[i]] = [x[1:-1] for x in globals()['comment_'+academic_list[i]]] # 앞뒤 괄호 삭제
+
+st.write(comment_imjin)
+
 st.markdown("## 3. 수정 양상")
 st.write("수정이 어떻게 이루어지는지를 더 자세히 살펴보기 위해, 문서 역사의 여러 정보를 활용하여 각 페이지의 수정 양상 또한 알아보았습니다. 먼저, 삭제 및 추가된 글자의 수 및 삭제/추가된 횟수를 페이지별로 살펴보았습니다. 다음으로, 시간에 따른 수정 양상의 변화를 cumulative sum 그래프로 나타내었습니다.")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
@@ -326,23 +338,6 @@ st.markdown("""
 - 수직으로 선이 그어지는 경우, 그리고 이런 수직선이 많이 보이는 경우, 급속한 문서의 변화가 지속되는 것으로 반달리즘 등을 의심해 볼 수 있습니다.\n
 - 어느 정도 지점이 되면 기울기가 완만해지는 모습을 보일 때, 충실하고 질이 높은 문서라고 볼 수 있습니다. 문서 내용이 축적되고, 어느 정도 합의에 이르렀다는 것을 의미하기 때문입니다.
 """)
-
-st.markdown("### 3.3. 코멘트 분석")
-st.write("cf. '되돌림', '편집요청' 따로 분석할 필요?")
-st.write('cf. 코멘트 키워드 분석 - 리스트 저장까지 완료 (워드클라우드 만들어야 함)')
-
-for i in range(len(culture_list)): #대중문화
-  globals()['comment_'+culture_list[i]] = globals()[culture_list[i]]['other'].values.tolist()
-  globals()['comment_'+culture_list[i]] = [x for x in globals()['comment_'+culture_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
-  globals()['comment_'+culture_list[i]] = [x[1:-1] for x in globals()['comment_'+culture_list[i]]] # 앞뒤 괄호 삭제
-
-for i in range(len(academic_list)): #학문
-  globals()['comment_'+academic_list[i]] = globals()[academic_list[i]]['other'].values.tolist()
-  globals()['comment_'+academic_list[i]] = [x for x in globals()['comment_'+academic_list[i]] if x not in '()'] # 비어 있는 열(괄호만 있는 경우) 삭제
-  globals()['comment_'+academic_list[i]] = [x[1:-1] for x in globals()['comment_'+academic_list[i]]] # 앞뒤 괄호 삭제
-
-#변수명 예시: st.write(comment_angrybird)
-
 
 
 #4. 데이터 분석 결과 2
