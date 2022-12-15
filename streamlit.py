@@ -328,6 +328,8 @@ for i in range(len(academic_list)): #학문
 st.markdown("<hr>", unsafe_allow_html=True)
 st.write('# 데이터 분석 결과 2: 학문 분야 500개, 대중문화 분야 397개 데이터 비교')
 
+st.write('이제 조금 더 큰 규모의 데이터를 분석해보겠습니다. 학문 분야 500개, 대중문화 분야 397개의 데이터를 수집하여 분석에 활용했습니다.')
+
 df_culture_aug0 = load_data('dataculture_aug.csv')
 df_academic_aug0 = load_data('dataacademic_aug.csv')
 
@@ -336,6 +338,7 @@ df_academic_aug = df_academic_aug0.copy()
 
 # wordcloud
 st.write('## 3. 코멘트 텍스트 분석: Wordcloud')
+st.write('나무위키의 편집 기록에는 편집한 유저가 코멘트를 남길 수 있습니다.\n해당 편집이 왜 이루어졌는지, 어떤 부분을 편집했는지 등을 자유롭게 작성할 수 있습니다.\n다만 의무적으로 남겨야 하는 것은 아니고 유저가 원할 때만 남기는 것입니다.\n우선 코멘트를 분석하여, 분야별로 지식의 수정이 어떻게 이루어지고 있는지 알아보려고 합니다.')
 
 # df에서 comments를 얻는 함수
 def get_comments(df):
@@ -399,6 +402,7 @@ st.write('### 1.2. 대중문화 분야의 편집 코멘트 워드클라우드')
 show_wordcloud(df_culture_aug)
 
 st.markdown('''
+**결과**\n
 - 코멘트만 보았을 때는 두 분야 모두 지식을 단조적으로 축적하기보다는 삭제 역시 활발히 이루어지는 것으로 보입니다.
 - 그런데 '삭제'라는 키워드가 등장했다고 해서 반드시 지식의 축적이 덜하다고 볼 수는 없습니다.
 - 대표적으로 맞춤법이나 문법을 지적하는 코멘트같은 경우, '삭제'를 언급한다고 해서 지식을 삭제한다고 보기 어렵습니다.
