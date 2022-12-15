@@ -570,10 +570,12 @@ def plot_history(dfs, labels, length=100, fromr1=True):
   plt.show()
   st.pyplot(fig)
 
+plot_history([df_academic_aug, df_culture_aug], labels=['academic', 'culture'], length=50, fromr1=True)
 plot_history([df_academic_aug, df_culture_aug], labels=['academic', 'culture'], length=100, fromr1=True)
 
 st.markdown('''
 **결과**\n
+- 총 스텝을 50으로 했을 때와 100으로 했을 때의 그래프입니다.
 - 그래프에서 0은 문서의 글자 수에 아무런 변화가 없었다는 것이고, 0보다 큰 것은 글자 수가 늘어났음을, 작은 것은 글자 수가 줄어들었음을 나타냅니다.
 - 즉 0을 기준으로 그래프를 통해 지식이 전반적으로 추가되고 있는지 삭제되고 있는지 볼 수 있다는 것입니다.
 - 대중문화 관련 문서는 그래프가 전반적으로 0 위에 있습니다. 즉 편집이 전반적으로 양의 방향으로 일어나고 있다는 것입니다.
