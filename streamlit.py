@@ -133,18 +133,21 @@ st.markdown('''
 ''')
 
 def highlight(text):
-    st.markdown(f' <div style="background-color:#ececec;padding:20px;border-radius:10px;">{text}</div>', unsafe_allow_html=True)
+    st.markdown(f' <div style="background-color:#ececec;padding:5px;border-radius:10px;">{text}</div>', unsafe_allow_html=True)
 
 
 st.markdown("## 데이터 수집 및 분석 방법")
 highlight("<b>데이터 수집</b>")
+st.write(" ")
 st.markdown("""
 저희 프로젝트에서는 문서 역사 데이터를 수집하여, 나무위키에서 지식이 축적되는 양상을 확인해보아, 이것이 학습에 용이할 수 있는지 탐구했습니다. 
 나무위키에서는 '주요 키워드'를 정리하여 전체적인 문서들의 분류를 제시하고 있습니다. 
 저희는 특히 내용적으로 대조될 수 있는 '대중문화 및 서브컬처'라는 대분류와, '학문'이라는 대분류에 초점을 두어 데이터를 수집했습니다. 
 또한, 먼저 각 대분류별로 10개씩 페이지를 랜덤 추출하여 자세히 분석하고, 이후 전체적인 경향성을 파악하기 위해 각 대분류별로 더 많은 데이터를 수집하여 추가적으로 분석해보았습니다.
 """)
+st.write(" ")
 highlight("<b>데이터 분석</b>")
+st.write(" ")
 st.markdown("""
 기존 선행연구에 기초하여, 다음과 같은 측면을 중점적으로 분석했습니다. \n
 **1. 각 페이지의 편집에 참여한 사용자의 수 및 사용자별 편집 횟수**\n
