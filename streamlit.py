@@ -44,6 +44,8 @@ df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
 #title styling
 def title(text):
      st.markdown(f'<h1 style="background-color:#3a8660;color:#ffffff;padding:20px;border-radius:14px;">{text}</h1>', unsafe_allow_html=True)
+def result(text):
+    st.markdown(f'<p style="background-color:#ebf2ee;padding:10px;border-radius:14px;">{text}</p>', unsafe_allow_html=True)
 
 st.subheader("2022-2 데이터 저널리즘 과제전")
 st.title("나무위키 활용 학습의 가능성과 한계")
@@ -125,7 +127,8 @@ st.write('''조금 더 큰 규모의 데이터를 모으기 위해 2차적으로
 
 #3. 데이터 분석 1: 10개씩 페이지 대조
 st.markdown("<hr>", unsafe_allow_html=True)
-title("데이터 분석 결과 1: 10개씩 페이지 대조")
+title("데이터 분석 결과 1")
+st.markdown("# : 10개씩 페이지 대조")
 
 # 키워드(페이지)별로 데이터프레임 저장
 for i in range(len(culture_list)):
@@ -150,7 +153,7 @@ with col1_2:
     for i in range(len(academic_list)):
         st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
-st.markdown("""
+result("""
 **결과** \n
 - 좀 더 많은 데이터를 살펴보아야겠지만, 대분류(대중매체/학문)에 따라 양상이 구분된다기보다는 1. 인기 있고 최신 동향이 자주 업데이트되는지(e.g. 게임, 드라마)/2. 사람마다 해석이나 의견이 달라 토론이 필요한 분야(e.g. 역사)인지에 따라 나뉘는 것으로 보입니다. \n
 - 일반적인 개념을 서술하거나 이미 내용이 정립된 (내용 보충 외의 별다른 조치가 필요하지 않은/논란이 없는/더 이상 활발히 연구되고 있지 않은) 학술 용어 등은 편집자 수도, 편집 정도도 적은 것 같습니다. \n
@@ -176,7 +179,7 @@ fig1_2_2 = px.histogram(df_academic, x='uname', color="page", opacity = 0.6)
 fig1_2_2.update_layout(title_text='학문 분야 사용자별 편집 횟수')
 st.plotly_chart(fig1_2_2, use_container_width=True)    
 
-st.markdown("""
+result("""
 **결과** \n
 - x축 영역이 넓을수록 편집에 참여한 사용자가 많고, y값이 클수록 한 사용자가 여러 번, 집중적으로 편집했다고 볼 수 있습니다. \n
 - 편집자가 많을수록 다양한 사람이 편집에 고루 참여하는 것이라고 단정짓기는 어려워 보입니다. 예컨대 임진왜란 키워드를 보면 특정 몇 명이 100번 넘게 수정하고 있는 것을 확인할 수 있습니다. 보통 문서 편집이 활발하지 않을수록 편향성이 심할 것이라고 생각하기 쉬운데, 편집이 활발한 문서이더라도 특정 몇몇 편집자들의 편향이 크게 들어갈 우려가 있다고 볼 수 있을 듯합니다. \n
@@ -205,7 +208,7 @@ with col22:
     fig2_2 = px.histogram(df_academic, x='page', color="page", opacity = 0.6)
     st.plotly_chart(fig2_2, use_container_width=True)
    
-st.markdown("""
+result("""
 **결과** \n
 업데이트가 자주 되고, 다양한 의견을 낼 수 있는 키워드가 수정 횟수도 많고 편집에 참여하는 사람 수도 많은 것으로 보입니다. 특히 '학문' 분야에서는 '임진왜란'과 같은 한국사 관련 페이지가 다른 페이지에 비해 월등히 높은 수정 횟수를 보여주고 있습니다. 이는 '임진왜란'이 활발한 토론의 장이 되고 있음을 시사하나, 이 토론이 반달리즘에 가까울지 건설적인 지식 구성에 가까운지는 더 자세히 데이터를 살펴보아야 알 수 있을 듯합니다.
 """)
@@ -299,7 +302,7 @@ for i in range(len(academic_list)):
         #plta.figure(figsize=(60,80))
         st.pyplot(figa)
         
-st.markdown("""
+result("""
 **결과** \n
 대중문화/서브컬처 편집 글자수 추이: 페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 시간이 최근으로 갈수록(원점과 가까워질수록) 삭제가 더 우세한 것으로 보입니다.""")
         
@@ -333,7 +336,7 @@ basic_chart2 = alt.Chart(df_academic).mark_line().encode(
 )
 st.altair_chart(basic_chart2, use_container_width=True)
 
-st.markdown("""
+result("""
 **결과**\n
 - 키워드(페이지)별 시기에 따른 수정 양상 추이로, 추가/삭제된 글자수의 총합(즉, 당시 문서의 총 글자수)을 파악할 수 있는 그래프입니다. 각각의 페이지는 다른 색상으로 표현되어 있습니다.\n
 - 기울기가 수평에 가까울수록 거의 문서가 수정되지 않았다(글자수가 변화하지 않았다)고 해석할 수 있습니다. (e.g. 게임서버의 경우 문서의 큰 변화가 없는 것으로 보입니다.)\n
@@ -346,7 +349,7 @@ st.markdown("""
 #4. 데이터 분석 결과 2
 st.markdown("<hr>", unsafe_allow_html=True)
 title('데이터 분석 결과 2')
-st.markdown('*학문 분야 500개, 대중문화 분야 397개 데이터 비교*')
+st.markdown("# 학문 분야 500개, 대중문화 분야 397개 데이터 비교")
 
 st.write('이제 조금 더 큰 규모의 데이터를 분석해보겠습니다. 학문 분야 500개, 대중문화 분야 397개의 데이터를 수집하여 분석에 활용했습니다.')
 
