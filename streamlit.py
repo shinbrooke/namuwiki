@@ -165,27 +165,13 @@ with st.expander("대중문화 및 서브컬처"):
     st.write("대중문화 및 서브컬처 분야 키워드: '앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대'")
     st.write(df_culture)
 
-#라디오
-culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
-#culture_status = st.radio('대중문화 및 서브컬처 분야', culture_radio)
-
-#for i in range(len(culture_radio)):
-#    if culture_status == culture_radio[i]:
-#        st.write(df_culture[df_culture['page'] == culture_list[i]])
+culture_keyword = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
+academic_keyword = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
 
 #전체 데이터
 with st.expander("학문"):
     st.write("학문 분야 키워드: '미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과'")
     st.write(df_academic)
-
-#라디오
-academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
-#acadamic_status = st.radio('학문 분야', academic_radio)
-
-# 위 코드랑 똑같은데 학문 분야도 라디오 기능 쓰려니까 오류 나네요.. 일단 각주처리해놓겠습니다!
-#for i in range(len(academic_radio)):
-#    if acadamic_status == acadamic_radio[i]:
-#        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
 with st.expander("칼럼명 소개"):
     st.write('이번 데이터 분석에 쓰인 데이터의 변수(칼럼)명은 다음과 같습니다.')
@@ -239,7 +225,7 @@ with col1_1:
     plt.xticks(rotation=90)
     st.pyplot(fig1e)
     for i in range(len(culture_list)):
-        st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
+        st.write(culture_keyword[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
 
 with col1_2:
     st.markdown('***학문 분야***')
@@ -255,7 +241,7 @@ with col1_2:
     plt.xticks(rotation=90)
     st.pyplot(fig2e)
     for i in range(len(academic_list)):
-        st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
+        st.write(academic_keyword[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
 result("""
 <b>결과</b>
@@ -267,15 +253,6 @@ result("""
 st.write(" ")
         
 st.markdown("### 1.2. 사용자별 편집 횟수")  
-# 대중문화 분야
-#for i in range(len(culture_list)):
-#    globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
-#    st.write(culture_radio[i], globals()[culture_list[i]+'_user'])
-
-# 학문 분야
-#for i in range(len(academic_list)):
-#    globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
-#    st.write(academic_radio[i], globals()[academic_list[i]+'_user'])
 
 #평균 사용자별 편집 횟수
 col1_m, col2_m = st.columns(2)
@@ -438,13 +415,6 @@ a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekroma
         
         
 st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
-
-# [필요하면 코드 사용하기] 키워드(페이지)별 편집 기간
-# (추가) max, min 값도 제시해서 얼마나 오래되었는지, 얼마나 최근까지 수정되었는지 파악할 수 있을 것
-#for i in range(len(culture_list)): #대중문화
-#  st.write(globals()[culture_list[i]]['datetime'].max() - globals()[culture_list[i]]['datetime'].min())
-#for i in range(len(academic_list)): #학문
-#  st.write(globals()[academic_list[i]]['datetime'].max() - globals()[academic_list[i]]['datetime'].min())
 
 st.markdown("***3.2.1. 키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)***")
 with st.expander("참고"):
