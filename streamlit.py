@@ -234,10 +234,10 @@ with col1_1:
         page = culture_list[i]
         culture_u_list.append([page, val_count])
     culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
-    fig1 = plt.figure()
+    fig1e = plt.figure()
     sb.barplot(data=culture_u, x='page', y='count',alpha=0.8)
     plt.xticks(rotation=90)
-    st.pyplot(fig1)
+    st.pyplot(fig1e)
     for i in range(len(culture_list)):
         st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
 
@@ -250,10 +250,10 @@ with col1_2:
         page = academic_list[i]
         academic_u_list.append([page, val_count])
     academic_u = pd.DataFrame(academic_u_list, columns = ['page', 'count'])
-    fig2 = plt.figure()
+    fig2e = plt.figure()
     sb.barplot(data=academic_u, x='page', y='count',alpha=0.8)
     plt.xticks(rotation=90)
-    st.pyplot(fig2)
+    st.pyplot(fig2e)
     for i in range(len(academic_list)):
         st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
