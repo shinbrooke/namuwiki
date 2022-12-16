@@ -231,13 +231,7 @@ with col1_1:
         page = culture_list[i]
         culture_u_list.append([page, val_count])
     culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
-    fig1 = plt.figure(figsize=(10,5))
-    sb.barplot(data = culture_u, x='page', y='count', alpha=0.8)
-    fig1.title('페이지 편집에 참여한 사용자 수')
-    fig1.ylabel('사용자 수', fontsize=12)
-    fig1.xlabel('페이지 표제어', fontsize=12)
-    # Add figure in streamlit app
-    st.pyplot(fig1)
+    st.bar_chart(culture_u)
 
 with col1_2:
     st.markdown('***학문 분야***')
