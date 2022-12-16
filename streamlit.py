@@ -231,7 +231,8 @@ with col1_1:
         page = culture_list[i]
         culture_u_list.append([page, val_count])
     culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
-    st.bar_chart(culture_u)
+    fig1 = sb.barplot(data=culture_u, x='page', y='count',alpha=0.8)
+    st.pyplot(fig1)
 
 with col1_2:
     st.markdown('***학문 분야***')
