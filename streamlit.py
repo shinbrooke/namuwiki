@@ -369,7 +369,7 @@ df_culture['newchange'] = df_culture.change2.apply(lambda x: newchange(x))
 df_academic['newchange'] = df_academic.change2.apply(lambda x:newchange(x))
 
 st.markdown("**대중문화/서브컬처 추가/삭제의 페이지별 양상**")
-st.markdown("'plus'는 글자가 추가된 횟수, 'minus'는 글자가 삭제된 횟수, 'same'은 글자수 변화가 없었던 수정 횟수를 의미합니다. 추가된 글자수와 삭제된 글자수가 비례하는 양상을 확인할 수 있습니다.")
+st.markdown("'plus'는 글자가 추가된 횟수, 'minus'는 글자가 삭제된 횟수, 'same'은 글자수 변화가 없었던 수정 횟수를 의미합니다.")
 df_culture2 = df_culture.sort_values(['newchange'], ascending = True)
 fig3_c1 = px.histogram(df_culture2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c1, use_container_width=True)
@@ -379,6 +379,14 @@ df_academic2 = df_academic.sort_values(['newchange'], ascending = True)
 fig3_c2 = px.histogram(df_academic2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c2, use_container_width=True)
 
+result("""
+<b>결과</b>
+
+- 추가된 글자수와 삭제된 글자수가 비례하는 양상을 확인할 수 있습니다.
+- 전체적으로 삭제에 비해 추가된 횟수가 많습니다. 이는 지식이 축적되는 방향으로 수정이 이루어짐을 의미할 수 있습니다.
+""")
+
+#plus, minus list 만들기
 for i in range(len(culture_list)): #대중문화
   globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
   globals()[culture_list[i]+'_minus_list'] = []
@@ -397,23 +405,13 @@ for i in range(len(academic_list)): #학문
     elif '-' in change:
       globals()[academic_list[i]+'_minus_list'].append(int(change[2:-1]))
 
-#figure 그리기
+#list 만들기
 c_plist = [angrybird_plus_list, crashlandingonyou_plus_list, gameserver_plus_list, itzy_plus_list, maplephantom_plus_list, myname_plus_list, readymadelife_plus_list, skycastle_plus_list, ssglanders_plus_list, transformer_plus_list]
 c_mlist = [angrybird_minus_list, crashlandingonyou_minus_list, gameserver_minus_list, itzy_minus_list, maplephantom_minus_list, myname_minus_list, readymadelife_minus_list, skycastle_minus_list, ssglanders_minus_list, transformer_minus_list]
-#selected_item1 = st.radio("대중문화/서브컬처 추가 vs 삭제", culture_list)	
-
-#for i in range(len(culture_list)):
-#    if selected_item1 == culture_list[i]:
-#        st.write("추가: {}번, 삭제: {}번".format(len(c_plist[i]),len(c_mlist[i])))
 
 a_plist = [aesthetic_plus_list, call_plus_list, epidemic_plus_list, greekromanmyth_plus_list, hungarianrevolution_plus_list, imjin_plus_list, montyhall_plus_list, officiallanguage_plus_list, pascaltriangle_plus_list, spotlight_plus_list]
 a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekromanmyth_minus_list, hungarianrevolution_minus_list, imjin_minus_list, montyhall_minus_list, officiallanguage_minus_list, pascaltriangle_minus_list, spotlight_minus_list]
-#selected_item2 = st.radio("학문 추가 vs 삭제", academic_list)	
-
-#for i in range(len(academic_list)):
-#    if selected_item2 == academic_list[i]:
-#        st.write("추가: {}번, 삭제: {}번".format(len(a_plist[i]),len(a_mlist[i])))
-        
+       
         
 st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
 
@@ -578,6 +576,7 @@ st.write(" ")
 # 편집 텀
 st.markdown('## 2. 편집 텀')
 st.write('편집이 얼마나 자주 이루어지는지도 지식의 형성 과정과 관련이 있는 중요한 요소입니다.\n이를테면 편집이 평균 한 달 간격으로 이루어지는 문서와 평균 하루 간격으로 이루어지는 문서가 있다고 생각해 봅시다.\n물론 각 문서가 다루는 대상의 성격에 따라 다르겠지만 전자는 잘못된 정보가 있어도 쉽게 수정되지 않고 많은 사용자에게 무방비하게 노출됩니다.\n편집이 자주 이루어지는 문서는 그렇지 않은 문서에 비해서 상대적으로 오정보에 강건합니다.\n그렇다면 학문 분야와 대중문화 분야는 어느 쪽에 더 가까울까요?')
+st.write('아래 그래프를 통해 편집의 간격 양상을 확인할 수 있습니다. 그래프의 x축은 각 분야별 한 문서의 평균 편집 간격(일)을, y축은 각 분야 문서 전체에서 특정 편집 간격인 문서의 비율이 얼마나 되는지를 나타냅니다. 편집 간격이 0일에 가까운 문서가 많으면 편집이 활발하게 이루어지는 것이므로 차트의 좌상단이 높은 형태의 그래프가 됩니다.')
 
 def get_edit_counts(df):
   edit_counts = df['page'].value_counts(sort=False)
@@ -634,13 +633,9 @@ plot_edit_terms([df_academic_aug, df_culture_aug], ['academic', 'culture'], bin_
 result('''
 <b>결과</b>
 
-- 위 그래프의 x축은 각 분야별 한 문서의 평균 편집 간격(일)을, y축은 각 분야 문서 전체에서 특정 편집 간격인 문서의 비율이 얼마나 되는지를 나타냅니다.
-- 즉 편집 간격이 0일에 가까운 문서가 많으면 편집이 활발하게 이루어지는 것이므로 차트의 좌상단이 높은 형태의 그래프가 됩니다.
 - 그래프에서 확연히 드러나듯 대중문화 분야의 문서는 편집 간격이 0일에 가까운 문서가 많고, 0일에서 멀어질수록 점점 상대빈도가 작아집니다.
-- 학문 분야도 편집 간격이 그렇게 긴 것은 아니지만 대중문화와는 달리 일주일 이내의 편집 간격을 가진 문서가 많다고는 보기 힘듭니다.
-- 다시 말해 학문 분야의 문서는 한번 잘못된 내용이 있으면 그것이 불특정 다수에게 계속 노출될 가능성이 대중문화 분야에 비해서 조금 더 높다고 할 수 있습니다.
-- 그러나 편집 간격이 짧다고 무조건 좋은 것은 아닙니다. 의견이 다른 사용자끼리 대립이 일어나서 비슷한 내용이 계속해서 쓰였다가 지워지는 이른바 '수정 전쟁'이 일어나고 있을 가능성이 있기 때문입니다.
-- 결국 지식이 어떤 방식으로 축적되는지 알아보려면 편집 기록의 전체적인 추이를 볼 필요가 있습니다.
+- 학문 분야도 편집 간격이 그렇게 긴 것은 아니지만 대중문화와는 달리 일주일 이내의 편집 간격을 가진 문서가 많다고는 보기 힘듭니다. 다시 말해 학문 분야의 문서는 한번 잘못된 내용이 있으면 그것이 불특정 다수에게 계속 노출될 가능성이 대중문화 분야에 비해서 조금 더 높다고 할 수 있습니다.
+- 그러나 편집 간격이 짧다고 무조건 좋은 것은 아닙니다. 의견이 다른 사용자끼리 대립이 일어나서 비슷한 내용이 계속해서 쓰였다가 지워지는 이른바 '수정 전쟁'이 일어나고 있을 가능성이 있기 때문입니다. 결국 지식이 어떤 방식으로 축적되는지 알아보려면 편집 기록의 전체적인 추이를 볼 필요가 있습니다.
 ''')
 st.write(" ")
 
@@ -648,10 +643,9 @@ st.write(" ")
 st.markdown('## 3. 편집 추이')
 st.write('각 분야별로 편집이 어떻게 이뤄지는지 추이를 살펴볼 차례입니다.\n추이를 살펴보면 어떤 식으로 지식이 형성되고 있는지 살펴볼 수 있습니다.')
 st.markdown('''
-- 유의할 점은, 각 문서는 편집 기록의 양상이 다르다는 것입니다. 예컨대 어떤 문서는 150번 수정되었을 수 있고 어떤 문서는 500번 수정되었을 수 있습니다.
-- 이를 보정하기 위해 문서가 처음 생성되었을 때부터 특정 스텝까지의 기록을 살펴보려고 합니다. 예를 들어 스텝이 100이라고 하면, (편집 횟수가 100회 이상인 문서에 한해) 첫번째 편집부터 100번째 편집까지만 고려하는 식으로 진행하였습니다.
-- 또한 분석을 할 때는 t번째 편집 버전의 글자 수와, 그 다음 차례인 t+1번째 편집 버전의 글자 수를 비교합니다. 만약 첫번째 편집에서 글자 수가 100이었고, 두번째 편집을 통해 글자 수가 200이 되었다면 양적으로 2배 증가한 것으로 해석할 수 있습니다. 이런 방식으로 문서의 글자 수, 다시 말해 지식의 양이 어떻게 변화해 나가는지 그 추이를 분석할 수 있습니다.
-- 조건을 만족하는 모든 문서에 대해 각각 위와 같은 방식으로 추이를 구하고, 분야별로 그 추이들의 평균을 구하여 그래프로 나타냈습니다. 아래는 총 스텝을 50으로 했을 때와 100으로 했을 때의 그래프입니다.
+유의할 점은, 각 문서는 편집 기록의 양상이 다르다는 것입니다. 예컨대 어떤 문서는 150번 수정되었을 수 있고 어떤 문서는 500번 수정되었을 수 있습니다. 이를 보정하기 위해 문서가 처음 생성되었을 때부터 특정 스텝까지의 기록을 살펴보려고 합니다. 예를 들어 스텝이 100이라고 하면, (편집 횟수가 100회 이상인 문서에 한해) 첫번째 편집부터 100번째 편집까지만 고려하는 식으로 진행하였습니다.
+또한 분석을 할 때는 t번째 편집 버전의 글자 수와, 그 다음 차례인 t+1번째 편집 버전의 글자 수를 비교합니다. 만약 첫번째 편집에서 글자 수가 100이었고, 두번째 편집을 통해 글자 수가 200이 되었다면 양적으로 2배 증가한 것으로 해석할 수 있습니다. 이런 방식으로 문서의 글자 수, 다시 말해 지식의 양이 어떻게 변화해 나가는지 그 추이를 분석할 수 있습니다. 
+조건을 만족하는 모든 문서에 대해 각각 위와 같은 방식으로 추이를 구하고, 분야별로 그 추이들의 평균을 구하여 그래프로 나타냈습니다. 아래는 총 스텝을 50으로 했을 때와 100으로 했을 때의 그래프입니다.
 ''')
 
 def get_rel_change_means(df, length=100, fromr1=True):
