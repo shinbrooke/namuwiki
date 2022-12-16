@@ -380,7 +380,7 @@ def newchange(change):
         return 'plus'
     elif change == 0: 
         return 'same'
-    elif change < 0
+    elif change < 0:
         return 'minus'
 df_culture['newchange'] = df_culture.change2.apply(lambda x: newchange(x))
 df_academic['newchange'] = df_academic.change2.apply(lambda x:newchange(x))
