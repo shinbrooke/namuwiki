@@ -224,15 +224,13 @@ with col1_1:
     st.markdown('***대중문화 분야***')
     for i in range(len(culture_list)):
         st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
-    culture_u = pd.DataFrame()
-    culture_u.columns = ['page', 'count']
+    culture_u_list = []
     for i in range(len(culture_list)):
         df_temp = df_culture[df_culture['page'] == culture_list[i]]
         val_count = df_temp['uname'].value_counts()
         page = culture_list[i]
-        df_temp2 = pd.DataFrame([[page, val_count]],
-                   columns=['page', 'count'])
-        culture_u = pd.concat([culture_u, df_temp2])
+        culture_u_list.append([page, val_count])
+    culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
     fig1 = plt.figure(figsize=(10,5))
     sb.barplot(data = culture_u, x='page', y='count', alpha=0.8)
     fig1.title('페이지 편집에 참여한 사용자 수')
