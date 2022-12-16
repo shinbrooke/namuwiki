@@ -349,7 +349,7 @@ for i in range(len(academic_list)): #학문
 st.write(comment_imjin)
 
 st.markdown("## 3. 수정 양상")
-st.write("수정이 어떻게 이루어지는지를 더 자세히 살펴보기 위해, 문서 역사의 여러 정보를 활용하여 각 페이지의 수정 양상 또한 알아보았습니다. 먼저, 삭제 및 추가된 글자의 수 및 삭제/추가된 횟수를 페이지별로 살펴보았습니다. 다음으로, 시간에 따른 수정 양상의 변화를 cumulative sum 그래프로 나타내었습니다.")
+st.write("수정이 어떻게 이루어지는지를 더 자세히 살펴보기 위해, 문서 역사의 여러 정보를 활용하여 각 페이지의 수정 양상 또한 알아보았습니다. 먼저, 삭제 및 추가된 횟수 및 글자수를 페이지별로 살펴보았습니다. 다음으로, 시간에 따른 수정 양상의 변화를 누적 합(cumulative sum) 그래프로 나타내었습니다.")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
 # change column 숫자로 변환 (대중문화)
 df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
@@ -369,7 +369,7 @@ df_culture['newchange'] = df_culture.change2.apply(lambda x: newchange(x))
 df_academic['newchange'] = df_academic.change2.apply(lambda x:newchange(x))
 
 st.markdown("**대중문화/서브컬처 추가/삭제의 페이지별 양상**")
-st.markdown("plus는 글자가 추가된 횟수, minus는 글자가 삭제된 횟수, same은 글자수 변화가 없었던 수정 횟수를 의미합니다.")
+st.markdown("'plus'는 글자가 추가된 횟수, 'minus'는 글자가 삭제된 횟수, 'same'은 글자수 변화가 없었던 수정 횟수를 의미합니다. 추가된 글자수와 삭제된 글자수가 비례하는 양상을 확인할 수 있습니다.")
 df_culture2 = df_culture.sort_values(['newchange'], ascending = True)
 fig3_c1 = px.histogram(df_culture2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c1, use_container_width=True)
@@ -417,9 +417,9 @@ a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekroma
         
 st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
 
-st.markdown("***3.2.1. 키워드(페이지)별 편집 글자수 추이 (파랑: 추가/빨강색: 삭제)***")
+st.markdown("***3.2.1. 키워드(페이지)별 편집 글자수 추이***")
 with st.expander("참고"):
-    st.write("파란색: 추가, 빨간색: 삭제")
+    st.write("파란색: 글자수 추가, 빨간색: 글자수 삭제")
     st.write('x값: 최근부터 시간순으로 부여된 인덱스, y값: 편집된 글자수')
 st.markdown("*대중문화/서브컬처 편집 글자수 추이*")
 selected_item3 = st.radio("대중문화/서브컬처 수정 양상", culture_list)	
@@ -446,7 +446,8 @@ for i in range(len(academic_list)):
 result("""
 <b>결과</b>
 
-대중문화/서브컬처 편집 글자수 추이: 페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 시간이 최근으로 갈수록(원점과 가까워질수록) 삭제가 더 우세한 것으로 보입니다.
+페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 그래프의 원점에 가까워질수록 시간이 최근에 가까워지는 것을 의미합니다. 이를 통해 페이지 생성 초반에는 글자수 추가가 활발히 이루어지다가, 시간이 지나고 정보가 쌓일수록 삭제 역시 빈번히 이루어지는 것을 확인할 수 있습니다.\n
+글자수를 몇백 자 정도 삭제하는 것은 잘못된 정보를 올바르게 고치기 위함일 수 있지만, 그래프상 눈에 띄게 많은 글자수를 삭제한 경우는 사용자의 실수 혹은 반달리즘을 행한 것으로 해석할 수 있을 것입니다.
 """)
 
 st.write(" ")
