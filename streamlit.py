@@ -222,8 +222,6 @@ col1_1, col1_2 = st.columns(2) #한 줄에 2개의 column을 나열함
 
 with col1_1:
     st.markdown('***대중문화 분야***')
-    for i in range(len(culture_list)):
-        st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
     culture_u_list = []
     for i in range(len(culture_list)):
         df_temp = df_culture[df_culture['page'] == culture_list[i]]
@@ -235,9 +233,22 @@ with col1_1:
     sb.barplot(data=culture_u, x='page', y='count',alpha=0.8)
     plt.xticks(rotation=90)
     st.pyplot(fig1)
+    for i in range(len(culture_list)):
+        st.write(culture_radio[i], len(globals()[culture_list[i]].groupby('uname'))) #한글 키워드 출력
 
 with col1_2:
     st.markdown('***학문 분야***')
+    academic_u_list = []
+    for i in range(len(academic_list)):
+        df_temp2 = df_academic[df_academic['page'] == academic_list[i]]
+        val_count = df_temp2['uname'].nunique()
+        page = academic_list[i]
+        academic_u_list.append([page, val_count])
+    academic_u = pd.DataFrame(academic_u_list, columns = ['page', 'count'])
+    fig2 = plt.figure(figsize=(10,5))
+    sb.barplot(data=academic_u, x='page', y='count',alpha=0.8)
+    plt.xticks(rotation=90)
+    st.pyplot(fig2)
     for i in range(len(academic_list)):
         st.write(academic_radio[i], len(globals()[academic_list[i]].groupby('uname'))) #한글 키워드 출력
 
