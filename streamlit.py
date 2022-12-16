@@ -386,11 +386,13 @@ df_culture['newchange'] = df_culture.change2.apply(lambda x: newchange(x))
 df_academic['newchange'] = df_academic.change2.apply(lambda x:newchange(x))
 
 st.markdown("대중문화/서브컬처 추가/삭제의 페이지별 양상")
-fig3_c1 = px.histogram(df_culture, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
+df_culture2 = df_culture.sort_values(['newchange'], ascending = True)
+fig3_c1 = px.histogram(df_culture2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c1, use_container_width=True)
 
 st.markdown("학문 추가/삭제의 페이지별 양상")
-fig3_c2 = px.histogram(df_academic, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
+df_academic2 = df_academic.sort_values(['newchange'], ascending = True)
+fig3_c2 = px.histogram(df_academic2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c2, use_container_width=True)
 
 
