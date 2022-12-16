@@ -304,7 +304,6 @@ st.write(" ")
 st.markdown("## 2. 페이지 수정 총 횟수")
 # 키워드(페이지) 종류 확인
 page_culture = df_culture.groupby('page')
-#page_social = df_social.groupby('page')
 page_academic = df_academic.groupby('page')
 
 col1, col2 = st.columns(2) #한 줄에 2개의 column을 나열함
