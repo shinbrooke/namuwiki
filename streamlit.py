@@ -227,7 +227,7 @@ with col1_1:
     culture_u_list = []
     for i in range(len(culture_list)):
         df_temp = df_culture[df_culture['page'] == culture_list[i]]
-        val_count = df_temp['uname'].value_counts()
+        val_count = df_temp['uname'].nunique()
         page = culture_list[i]
         culture_u_list.append([page, val_count])
     culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
