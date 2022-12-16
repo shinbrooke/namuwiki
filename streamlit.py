@@ -259,9 +259,9 @@ result("""
 - 일반적인 개념을 서술하거나 이미 내용이 정립된 (내용 보충 외의 별다른 조치가 필요하지 않은/논란이 없는/더 이상 활발히 연구되고 있지 않은) 학술 용어 등은 편집자 수도, 편집 정도도 적은 것 같습니다.
 - 편집자 수가 많은 경우, 추가되는 내용도 많기 때문에 문서의 내용도 더 충실할 경향이 있을 것으로 보입니다. 그렇지만 그만큼 몇몇 특정 사용자가 편향된 내용을 방대한 양으로 작성한다든지, 반달리즘이 일어날 위험도 큰 것 같습니다. 
 """)
+st.write(" ")
         
 st.markdown("### 1.2. 사용자별 편집 횟수")  
-#st.write('cf. 평균 편집 횟수 추가 필요 (+ 유저별 추가/삭제 양상도 분석해보면 좋을 것)')
 # 대중문화 분야
 #for i in range(len(culture_list)):
 #    globals()[culture_list[i]+'_user'] = globals()[culture_list[i]].groupby(['uname']).count()['change']
@@ -272,6 +272,36 @@ st.markdown("### 1.2. 사용자별 편집 횟수")
 #    globals()[academic_list[i]+'_user'] = globals()[academic_list[i]].groupby(['uname']).count()['change']
 #    st.write(academic_radio[i], globals()[academic_list[i]+'_user'])
 
+#평균 사용자별 편집 횟수
+col1_m, col2_m = st.columns(2)
+with col1_m:
+    st.markdown("**대중문화/서브컬처 페이지별 유저 당 평균 수정 횟수**")
+    culture_m_list = []
+    for i in range(len(culture_list)):
+        df_temp = df_culture[df_culture['page'] == culture_list[i]]
+        val_count = df_temp['uname'].value_counts().mean()
+        page = culture_list[i]
+        culture_m_list.append([page, val_count])
+    culture_m = pd.DataFrame(culture_m_list, columns = ['page', 'count'])
+    fig3 = plt.figure(figsize=(10,5))
+    sb.barplot(data=culture_m, x='page', y='count',alpha=0.8)
+    plt.xticks(rotation=90)
+    st.pyplot(fig3)
+
+with col2_m:
+    st.markdown("**학문 페이지별 유저 당 평균 수정 횟수**")
+    academic_m_list = []
+    for i in range(len(academic_list)):
+        df_temp = df_academic[df_academic['page'] == academic_list[i]]
+        val_count = df_temp['uname'].value_counts().mean()
+        page = academic_list[i]
+        academic_m_list.append([page, val_count])
+    academic_m = pd.DataFrame(academic_m_list, columns = ['page', 'count'])
+    fig4 = plt.figure(figsize=(10,5))
+    sb.barplot(data=academic_m, x='page', y='count',alpha=0.8)
+    plt.xticks(rotation=90)
+    st.pyplot(fig4)
+    
 fig1_2_1 = px.histogram(df_culture, x='uname', color="page", opacity = 0.6)
 fig1_2_1.update_layout(title_text='대중문화/서브컬처 분야 사용자별 편집 횟수')
 st.plotly_chart(fig1_2_1, use_container_width=True)
@@ -286,6 +316,7 @@ result("""
 - 편집자가 많을수록 다양한 사람이 편집에 고루 참여하는 것이라고 단정짓기는 어려워 보입니다. 예컨대 임진왜란 키워드를 보면 특정 몇 명이 100번 넘게 수정하고 있는 것을 확인할 수 있습니다. 보통 문서 편집이 활발하지 않을수록 편향성이 심할 것이라고 생각하기 쉬운데, 편집이 활발한 문서이더라도 특정 몇몇 편집자들의 편향이 크게 들어갈 우려가 있다고 볼 수 있을 듯합니다.
 - 이렇게 요약해볼 수 있을 것 같습니다: 편집자 수와 편집 횟수는 어느 정도 비례하는 것으로 보입니다. 둘 다 적은 경우는 상대적으로 내용이 빈약할 수밖에 없습니다 (소수가 방대한 양을 작성할 수 있으나, 정보가 편향될 우려가 있습니다). // 반면 수정이 빈번하게 이루어지는 키워드는 내용이 상대적으로 충실해질 것이나, 편집자 수가 많아지는 만큼 특정 소수 편집자들에 의한 반달리즘에 취약하다고 볼 수 있을 것입니다 (특히 논란 있는 키워드일 경우 더욱 그러합니다).
 """)
+st.write(" ")
 
 st.markdown("## 2. 페이지 수정 총 횟수")
 # 키워드(페이지) 종류 확인
@@ -315,7 +346,10 @@ result("""
 업데이트가 자주 되고, 다양한 의견을 낼 수 있는 키워드가 수정 횟수도 많고 편집에 참여하는 사람 수도 많은 것으로 보입니다. 특히 '학문' 분야에서는 '임진왜란'과 같은 한국사 관련 페이지가 다른 페이지에 비해 월등히 높은 수정 횟수를 보여주고 있습니다. 이는 '임진왜란'이 활발한 토론의 장이 되고 있음을 시사하나, 이 토론이 반달리즘에 가까울지 건설적인 지식 구성에 가까운지는 더 자세히 데이터를 살펴보아야 알 수 있을 듯합니다.
 """)
 
-st.markdown("""\n\n\n
+st.write(" ")
+st.write(" ")
+
+st.markdown("""
 [참고] 임진왜란 키워드의 코멘트는 아래에서 확인할 수 있습니다.
 """)
 
