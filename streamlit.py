@@ -81,8 +81,9 @@ culture_list = ['angrybird', 'crashlandingonyou', 'gameserver', 'itzy', 'mapleph
 academic_list = ['aesthetic', 'call', 'epidemic', 'greekromanmyth', 'hungarianrevolution', 'imjin', 'montyhall', 'officiallanguage', 'pascaltriangle', 'spotlight']
 
 #전체 데이터
-st.write("대중문화 및 서브컬처 분야 키워드: '앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대'")
-st.write(df_culture)
+with st.expander("대중문화 및 서브컬처"):
+    st.write("대중문화 및 서브컬처 분야 키워드: '앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대'")
+    st.write(df_culture)
 
 #라디오
 culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서버', 'ITZY', '팬텀(메이플스토리)', '마이 네임', '레디메이드 인생', 'SKY 캐슬', 'SSG 랜더스/2021년/5월', '트랜스포머: 사라진 시대']
@@ -94,8 +95,9 @@ culture_radio = ['앵그리버드 시리즈', '사랑의 불시착', '게임 서
 st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 #전체 데이터
-st.write("학문 분야 키워드: '미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과'")
-st.write(df_academic)
+with st.expander("학문"):
+    st.write("학문 분야 키워드: '미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과'")
+    st.write(df_academic)
 
 #라디오
 academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1956년 헝가리 혁명', '임진왜란', '몬티 홀 문제', '공용어', '파스칼의 삼각형', '조명 효과']
@@ -106,16 +108,17 @@ academic_radio = ['미학', '통화', '전염병', '그리스 로마 신화', '1
 #    if acadamic_status == acadamic_radio[i]:
 #        st.write(df_acadamic[df_acadamic['page'] == acadamic_list[i]])
 
-st.write('이번 데이터 분석에 쓰인 데이터의 변수(칼럼)명은 다음과 같습니다.')
-st.markdown('''
-- code: 일련 번호 (숫자가 클수록 최신)
-- change: 수정 양상 (+: 글자수 추가, -: 글자수 삭제)
-- uname: 편집자 닉네임/아이피
-- other: 편집자 코멘트
-- page: 페이지 키워드 (영어로 표기)
-- category: 대분류(대중문화 및 서브컬처/학문)
-- datetime: 수정 날짜 및 시간
-''')
+with st.expander("칼럼명 소개"):
+    st.write('이번 데이터 분석에 쓰인 데이터의 변수(칼럼)명은 다음과 같습니다.')
+    st.markdown('''
+    - code: 일련 번호 (숫자가 클수록 최신)
+    - change: 수정 양상 (+: 글자수 추가, -: 글자수 삭제)
+    - uname: 편집자 닉네임/아이피
+    - other: 편집자 코멘트
+    - page: 페이지 키워드 (영어로 표기)
+    - category: 대분류(대중문화 및 서브컬처/학문)
+    - datetime: 수정 날짜 및 시간
+    ''')
 
 st.markdown('## 데이터 2')
 st.write('''조금 더 큰 규모의 데이터를 모으기 위해 2차적으로 데이터를 수집했습니다. 수집 방식과 데이터 구성은 기본적으로 데이터 1을 수집할 때와 유사하게 진행했습니다.
@@ -127,8 +130,8 @@ st.write('''조금 더 큰 규모의 데이터를 모으기 위해 2차적으로
 
 #3. 데이터 분석 1: 10개씩 페이지 대조
 st.markdown("<hr>", unsafe_allow_html=True)
-title("데이터 분석 결과 1")
-st.markdown("# : 10개씩 페이지 대조")
+title("""데이터 분석 결과 1
+      10개씩 페이지 대조""")
 
 # 키워드(페이지)별로 데이터프레임 저장
 for i in range(len(culture_list)):
