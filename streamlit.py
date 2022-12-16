@@ -234,7 +234,7 @@ with col1_1:
         page = culture_list[i]
         culture_u_list.append([page, val_count])
     culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
-    fig1 = plt.figure(figsize=(10,5))
+    fig1 = plt.figure()
     sb.barplot(data=culture_u, x='page', y='count',alpha=0.8)
     plt.xticks(rotation=90)
     st.pyplot(fig1)
@@ -250,7 +250,7 @@ with col1_2:
         page = academic_list[i]
         academic_u_list.append([page, val_count])
     academic_u = pd.DataFrame(academic_u_list, columns = ['page', 'count'])
-    fig2 = plt.figure(figsize=(10,5))
+    fig2 = plt.figure()
     sb.barplot(data=academic_u, x='page', y='count',alpha=0.8)
     plt.xticks(rotation=90)
     st.pyplot(fig2)
