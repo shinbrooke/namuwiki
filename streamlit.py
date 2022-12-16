@@ -64,7 +64,7 @@ with st.expander("문제의식 설명"):
     st.write("""지금까지 집단지성의 개념적 모형, 집단지성을 활용한 협력학습의 가능성 등에 대한 연구는 다수 이루어졌지만, 일상적으로 사용되는 위키에서 이루어지고 있는 협력학습과 집단지성의 형성에 대한 연구는 부족해보입니다. 특히, 많은 사용자들이 활용하고 있는 나무위키의 경우, 특정 사건이나 이슈에 대한 편향된 시각을 지적하는 논문은 있었지만, 여기에서 이루어질 수 있는 학습과 공유된 의사소통 및 지식기반 형성의 과정을 탐색한 경우는 부족했습니다. 
 따라서 이번 프로젝트에서는 **나무위키의 '문서 역사' 데이터**를 분석해 봄으로써 나무위키에서 어떻게 지식이 형성되고 축적되는지를 대주제별로 확인하였습니다. 이를 통해 나무위키를 통해 학습하게 되는 양상을 확인하고, 나무위키 활용의 시사점을 얻을 수 있다고 생각합니다.
 """)
-    st.html("""참고문헌\n
+    st.markdown("""참고문헌\n
     이유나, 이상수. (2009). 집단지성의 교육적 적용을 위한 개념모형과 설계 원리. 교육공학연구, 25(4), 213-239.\n
     Das, S., & Magdon-Ismail, M. (2010, June). Collective wisdom: Information growth in wikis and blogs. In Proceedings of the 11th ACM conference on Electronic commerce (pp. 231-240).\n
     Hu, M., Lim, E. P., Sun, A., Lauw, H. W., & Vuong, B. Q. (2007, November). Measuring article quality in wikipedia: models and evaluation. In Proceedings of the sixteenth ACM conference on Conference on information and knowledge management (pp. 243-252).\n
