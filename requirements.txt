@@ -9,3 +9,4 @@ altair
 scipy
 konlpy
 wordcloud
+undetected_chromedriver
