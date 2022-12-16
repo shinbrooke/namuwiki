@@ -230,8 +230,9 @@ with col1_1:
         df_temp = df_culture[df_culture['page'] == culture_list[i]]
         val_count = df_temp['uname'].value_counts()
         page = culture_list[i]
-        culture_u.page[i] == page
-        culture_u.count[i] == val_count
+        df_temp2 = pd.DataFrame([[page, val_count]],
+                   columns=['page', 'count'])
+        culture_u = pd.concat([culture_u, df_temp2])
     fig1 = plt.figure(figsize=(10,5))
     sb.barplot(data = culture_u, x='page', y='count', alpha=0.8)
     fig1.title('페이지 편집에 참여한 사용자 수')
