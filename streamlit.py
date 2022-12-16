@@ -43,7 +43,7 @@ df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
 
 #title styling
 def title(text):
-     st.markdown(f'<p style="background-color:#3a8660;color:#ffffff;font-size:50px;border-radius:5%;">{text}</p>', unsafe_allow_html=True)
+     st.markdown(f'<h1 style="background-color:#3a8660;color:#ffffff;border-radius:5%;">{text}</h1>', unsafe_allow_html=True)
 
 st.subheader("2022-2 데이터 저널리즘 과제전")
 st.title("나무위키 활용 학습의 가능성과 한계")
