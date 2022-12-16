@@ -275,7 +275,7 @@ st.markdown("### 1.2. 사용자별 편집 횟수")
 #평균 사용자별 편집 횟수
 col1_m, col2_m = st.columns(2)
 with col1_m:
-    st.markdown("**대중문화/서브컬처 페이지별 유저 당 평균 수정 횟수**")
+    st.markdown("**대중문화 페이지별 유저 당 평균 수정 횟수**")
     culture_m_list = []
     for i in range(len(culture_list)):
         df_temp = df_culture[df_culture['page'] == culture_list[i]]
@@ -368,8 +368,33 @@ st.write(comment_imjin)
 st.markdown("## 3. 수정 양상")
 st.write("수정이 어떻게 이루어지는지를 더 자세히 살펴보기 위해, 문서 역사의 여러 정보를 활용하여 각 페이지의 수정 양상 또한 알아보았습니다. 먼저, 삭제 및 추가된 글자의 수 및 삭제/추가된 횟수를 페이지별로 살펴보았습니다. 다음으로, 시간에 따른 수정 양상의 변화를 cumulative sum 그래프로 나타내었습니다.")
 st.markdown("### 3.1. 삭제 vs 추가 횟수")
+# change column 숫자로 변환 (대중문화)
+df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
+df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
+# change column 숫자로 변환 (학문)
+df_academic['change2'] = df_academic['change'].map(lambda x: x.lstrip('(').rstrip(')'))
+df_academic['change2'] = df_academic.change2.apply(lambda x: float(x))
+
+def newchange(change):
+    if change > 0: 
+        return 'plus'
+    elif change = 0: 
+        return 'same'
+    elif change < 0 : minus
+        return 'minus'
+df_culture['newchange'] = df_culture.change2.apply(lambda x: newchange(x))
+df_academic['newchange'] = df_academic.change2.apply(lambda x:newchange(x))
+
+st.markdown("대중문화/서브컬처 추가/삭제의 페이지별 양상")
+fig3_c1 = px.histogram(df_culture, x='page', color="newchange", color_discrete_sequence = {1:'rgb(0, 0, 100)',0:'rgb(0, 200, 200)'}, barmode='group', opacity = 0.6)
+st.plotly_chart(fig3_c1, use_container_width=True)
+
+st.markdown("학문 추가/삭제의 페이지별 양상")
+fig3_c2 = px.histogram(df_academic, x='page', color="newchange", color_discrete_sequence = {1:'rgb(0, 0, 100)',0:'rgb(0, 200, 200)'}, barmode='group', opacity = 0.6)
+st.plotly_chart(fig3_c2, use_container_width=True)
+
+
 st.write("파란색: 추가, 빨간색: 삭제")
-#'cf. 키워드(페이지)의 수정(+, -) 글자수 리스트에 저장까지 함'
 for i in range(len(culture_list)): #대중문화
   globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
   globals()[culture_list[i]+'_minus_list'] = []
@@ -450,9 +475,6 @@ result("""
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("***3.2.2. 페이지별 수정 양상 추이***")
 st.write("변화한 글자수의 cumulative sum이 페이지별로 시간에 따라 어떻게 변화했는지를 확인한 그래프입니다.")
-# change column 숫자로 변환
-df_culture['change2'] = df_culture['change'].map(lambda x: x.lstrip('(').rstrip(')'))
-df_culture['change2'] = df_culture.change2.apply(lambda x: float(x))
 df_culture = df_culture.sort_values(['datetime'], ascending = True)
 df_culture['cumsum'] = df_culture.groupby('page')['change2'].transform(pd.Series.cumsum)
 #페이지별 편집 양상 line graph
@@ -464,9 +486,6 @@ basic_chart1 = alt.Chart(df_culture).mark_line().encode(
 )
 st.altair_chart(basic_chart1, use_container_width=True)
 
-# change column 숫자로 변환 (학문)
-df_academic['change2'] = df_academic['change'].map(lambda x: x.lstrip('(').rstrip(')'))
-df_academic['change2'] = df_academic.change2.apply(lambda x: float(x))
 df_academic = df_academic.sort_values(['datetime'], ascending = True)
 df_academic['cumsum'] = df_academic.groupby('page')['change2'].transform(pd.Series.cumsum)
 #페이지별 편집 양상 line graph
