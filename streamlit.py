@@ -385,18 +385,17 @@ def newchange(change):
 df_culture['newchange'] = df_culture.change2.apply(lambda x: newchange(x))
 df_academic['newchange'] = df_academic.change2.apply(lambda x:newchange(x))
 
-st.markdown("대중문화/서브컬처 추가/삭제의 페이지별 양상")
+st.markdown("**대중문화/서브컬처 추가/삭제의 페이지별 양상**")
+st.markdown("plus는 글자가 추가된 횟수, minus는 글자가 삭제된 횟수, same은 글자수 변화가 없었던 수정 횟수를 의미합니다.")
 df_culture2 = df_culture.sort_values(['newchange'], ascending = True)
 fig3_c1 = px.histogram(df_culture2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c1, use_container_width=True)
 
-st.markdown("학문 추가/삭제의 페이지별 양상")
+st.markdown("**학문 추가/삭제의 페이지별 양상**")
 df_academic2 = df_academic.sort_values(['newchange'], ascending = True)
 fig3_c2 = px.histogram(df_academic2, x='page', color="newchange", color_discrete_sequence = {0:'rgb(243, 97, 126)',1:'rgb(97, 97, 243)',2:'rgb(158, 206, 182)'}, barmode='group', opacity = 0.6)
 st.plotly_chart(fig3_c2, use_container_width=True)
 
-
-st.write("파란색: 추가, 빨간색: 삭제")
 for i in range(len(culture_list)): #대중문화
   globals()[culture_list[i]+'_plus_list'] = [] # 변수명 e.g. angrybird_plus_list
   globals()[culture_list[i]+'_minus_list'] = []
@@ -418,19 +417,19 @@ for i in range(len(academic_list)): #학문
 #figure 그리기
 c_plist = [angrybird_plus_list, crashlandingonyou_plus_list, gameserver_plus_list, itzy_plus_list, maplephantom_plus_list, myname_plus_list, readymadelife_plus_list, skycastle_plus_list, ssglanders_plus_list, transformer_plus_list]
 c_mlist = [angrybird_minus_list, crashlandingonyou_minus_list, gameserver_minus_list, itzy_minus_list, maplephantom_minus_list, myname_minus_list, readymadelife_minus_list, skycastle_minus_list, ssglanders_minus_list, transformer_minus_list]
-selected_item1 = st.radio("대중문화/서브컬처 추가 vs 삭제", culture_list)	
+#selected_item1 = st.radio("대중문화/서브컬처 추가 vs 삭제", culture_list)	
 
-for i in range(len(culture_list)):
-    if selected_item1 == culture_list[i]:
-        st.write("추가: {}번, 삭제: {}번".format(len(c_plist[i]),len(c_mlist[i])))
+#for i in range(len(culture_list)):
+#    if selected_item1 == culture_list[i]:
+#        st.write("추가: {}번, 삭제: {}번".format(len(c_plist[i]),len(c_mlist[i])))
 
 a_plist = [aesthetic_plus_list, call_plus_list, epidemic_plus_list, greekromanmyth_plus_list, hungarianrevolution_plus_list, imjin_plus_list, montyhall_plus_list, officiallanguage_plus_list, pascaltriangle_plus_list, spotlight_plus_list]
 a_mlist = [aesthetic_minus_list, call_minus_list, epidemic_minus_list, greekromanmyth_minus_list, hungarianrevolution_minus_list, imjin_minus_list, montyhall_minus_list, officiallanguage_minus_list, pascaltriangle_minus_list, spotlight_minus_list]
-selected_item2 = st.radio("학문 추가 vs 삭제", academic_list)	
+#selected_item2 = st.radio("학문 추가 vs 삭제", academic_list)	
 
-for i in range(len(academic_list)):
-    if selected_item2 == academic_list[i]:
-        st.write("추가: {}번, 삭제: {}번".format(len(a_plist[i]),len(a_mlist[i])))
+#for i in range(len(academic_list)):
+#    if selected_item2 == academic_list[i]:
+#        st.write("추가: {}번, 삭제: {}번".format(len(a_plist[i]),len(a_mlist[i])))
         
         
 st.markdown("### 3.2. 시간에 따른 수정 양상 변화")
@@ -474,7 +473,8 @@ result("""
 대중문화/서브컬처 편집 글자수 추이: 페이지별로 시간에 따른 수정과 삭제를 확인할 수 있습니다. 시간이 최근으로 갈수록(원점과 가까워질수록) 삭제가 더 우세한 것으로 보입니다.
 """)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.write(" ")
+
 st.markdown("***3.2.2. 페이지별 수정 양상 추이***")
 st.write("변화한 글자수의 cumulative sum이 페이지별로 시간에 따라 어떻게 변화했는지를 확인한 그래프입니다.")
 df_culture = df_culture.sort_values(['datetime'], ascending = True)
@@ -597,6 +597,7 @@ result('''
 - 또 코멘트 작성은 의무가 아니기 때문에 코멘트가 없는 경우도 많습니다.
 - 지식이 어떻게 형성되고 있는지 더 정확한 모습을 알아보기 위해서는 구체적인 편집 기록을 볼 필요가 있습니다.
 ''')
+st.write(" ")
 
 # 편집 텀
 st.markdown('## 2. 편집 텀')
@@ -665,7 +666,7 @@ result('''
 - 그러나 편집 간격이 짧다고 무조건 좋은 것은 아닙니다. 의견이 다른 사용자끼리 대립이 일어나서 비슷한 내용이 계속해서 썼다가 지워지는 이른바 '수정 전쟁'이 일어나고 있을 가능성이 있기 때문입니다.
 - 결국 지식이 어떤 방식으로 축적되는지 알아보려면 편집 기록의 전체적인 추이를 볼 필요가 있습니다.
 ''')
-
+st.write(" ")
 
 # 추이
 st.markdown('## 3. 편집 추이')
@@ -773,6 +774,8 @@ result('''
 - 그래프가 똑같이 0 위를 지나갈 때도, 대중문화 관련 문서는 학문 관련 문서보다 상대적으로 위쪽에 그래프가 그려집니다.
 - 이는 지식이 추가되는 편집 양상일 때 대중문화 관련 문서가 학문 관련 문서보다 더 많은 양의 정보가 추가된다는 뜻입니다.
 ''')
+
+st.write(" ")
 
 #결론
 st.markdown("<hr>", unsafe_allow_html=True)
