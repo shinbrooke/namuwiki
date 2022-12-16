@@ -233,7 +233,7 @@ with col1_1:
     culture_u = pd.DataFrame(culture_u_list, columns = ['page', 'count'])
     fig1 = plt.figure(figsize=(10,5))
     sb.barplot(data=culture_u, x='page', y='count',alpha=0.8)
-    fig1.set_xticklabels(rotation=90)
+    plt.xticks(rotation=90)
     st.pyplot(fig1)
 
 with col1_2:
