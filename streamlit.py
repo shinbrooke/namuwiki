@@ -43,7 +43,7 @@ df_academic['datetime'] = pd.to_datetime(df_academic['datetime'])
 
 #title styling
 def title(text):
-     st.markdown(f'<h1 style="background-color:#3a8660;color:#ffffff;padding:10px;border-radius:5%;">{text}</h1>', unsafe_allow_html=True)
+     st.markdown(f'<h1 style="background-color:#3a8660;color:#ffffff;padding:20px;border-radius:14px;">{text}</h1>', unsafe_allow_html=True)
 
 st.subheader("2022-2 데이터 저널리즘 과제전")
 st.title("나무위키 활용 학습의 가능성과 한계")
@@ -51,7 +51,7 @@ st.write("10조: 서정빈, 신부경, 정민제")
 
 #1. 문제의식 서술
 st.markdown("<hr>", unsafe_allow_html=True)
-title("# 문제의식")
+title("문제의식")
 with st.expander("문제의식 설명"):
     st.write("""**1. 나무위키의 활용**""")
     st.write("""현재 나무위키, 위키피디아와 같은 '위키'들은 우리에게 너무나도 친숙한 존재가 되었습니다. 특히, 나무위키는 한국어 중심으로 구성된 플랫폼이라는 점에서 더 가깝게 느껴지기도 합니다. 구글과 같은 서치엔진에서 검색을 할 때도, 나무위키 문서가 검색 1페이지에 등장하는 모습을 자주 확인할 수 있습니다.  2022년 12월 기준 4,763,273개 가량의 문서가 나무위키에 작성되어 있으며, 이 문서들은 실시간으로 수정되기도 하고, 새로 만들어지고 있기도 합니다.""")
@@ -65,7 +65,7 @@ with st.expander("문제의식 설명"):
 
 #2. 데이터 소개
 st.markdown("<hr>", unsafe_allow_html=True)
-title("# 데이터 소개")
+title("데이터 소개")
 
 #나무위키 대분류 3개에서 어떻게 랜덤하게 키워드를 선별해서(선별기준) history 크롤링했는지 간단히 언급 필요
 #나무위키 history 페이지 캡처해서 설명하면 좋을 것 같아요! - 정빈
@@ -125,7 +125,7 @@ st.write('''조금 더 큰 규모의 데이터를 모으기 위해 2차적으로
 
 #3. 데이터 분석 1: 10개씩 페이지 대조
 st.markdown("<hr>", unsafe_allow_html=True)
-title("# 데이터 분석 결과 1: 10개씩 페이지 대조")
+title("데이터 분석 결과 1: 10개씩 페이지 대조")
 
 # 키워드(페이지)별로 데이터프레임 저장
 for i in range(len(culture_list)):
@@ -345,7 +345,7 @@ st.markdown("""
 
 #4. 데이터 분석 결과 2
 st.markdown("<hr>", unsafe_allow_html=True)
-title('# 데이터 분석 결과 2')
+title('데이터 분석 결과 2')
 st.markdown('*학문 분야 500개, 대중문화 분야 397개 데이터 비교*')
 
 st.write('이제 조금 더 큰 규모의 데이터를 분석해보겠습니다. 학문 분야 500개, 대중문화 분야 397개의 데이터를 수집하여 분석에 활용했습니다.')
@@ -606,7 +606,7 @@ st.markdown('''
 
 #결론
 st.markdown("<hr>", unsafe_allow_html=True)
-title("# 결론")
+title("결론")
 with st.expander("시사점 및 제언"):
     st.markdown("""1. 나무위키를 통해 효과적인 집단지성의 구축이 가능합니다. 다만, 활발한 축적 방식의 토론을 기반으로 할 때 질 높은 집단지성을 형성할 수 있을 것으로 보입니다.""")
     st.markdown("""2. 학문 분야의 글은 대중문화 분야에 비해 대체로 편집도 적고 의견이 빠르게 수렴되지만, 토론이 가능한 주제의 경우 더 다채로운 축적과 수정의 양상이 드러났습니다. 이를 통해 토론에 대한 홍보와 커뮤니티 수칙 형성의 필요성을 언급해볼 수 있습니다.""")
